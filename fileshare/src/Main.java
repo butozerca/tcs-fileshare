@@ -31,7 +31,7 @@ public class Main {
             		System.exit(-1);
             	}
             	
-            	// TODO: tutaj odpalamy aplikacje
+            	new Application().setVisible(true);
             }
         });
     }
