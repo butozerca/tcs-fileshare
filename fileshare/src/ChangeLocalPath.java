@@ -10,14 +10,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-
-public class ChangeUsername extends JFrame {
+public class ChangeLocalPath extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5724407693366871196L;
-	private static ChangeUsername instance = null;
+	private static ChangeLocalPath instance = null;
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -25,8 +24,8 @@ public class ChangeUsername extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	private ChangeUsername(final JTextPane textPane) {
-		setTitle("Change your username");
+	private ChangeLocalPath(final JTextPane textPane) {
+		setTitle("Change your local path");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -55,10 +54,10 @@ public class ChangeUsername extends JFrame {
 		btnOK.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(validateName(textField.getText())){
-					Fileshare.getInstance().getUser().setUsername(textField.getText());
-					System.out.println("Username changed to " + textField.getText());
-					textPane.setText(Fileshare.getInstance().getUser().getUsername());
+				if(validatePath(textField.getText())){
+					Fileshare.getInstance().getUser().setPath(textField.getText());
+					System.out.println("Local path changed to " + textField.getText());
+					textPane.setText(Fileshare.getInstance().getUser().getPath());
 				}
 				dispose();
 			}
@@ -67,14 +66,14 @@ public class ChangeUsername extends JFrame {
 		this.setAlwaysOnTop(true);
 	}
 	
-	public static ChangeUsername getInstance(JTextPane textPane){
+	public static ChangeLocalPath getInstance(JTextPane textPane){
 		if(instance == null)
-			instance = new ChangeUsername(textPane);
+			instance = new ChangeLocalPath(textPane);
 		return instance;
 	}
 	
-	private boolean validateName(String text){
-		if(Pattern.compile("[a-zA-Z0-9]+").matcher(text).matches())
+	private boolean validatePath(String text){
+		if(Pattern.compile("([a-zA-Z0-9]+/)+").matcher(text).matches())
 			return true;
 		return false;
 	}

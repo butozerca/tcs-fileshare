@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 
@@ -20,8 +19,8 @@ public class Application extends JFrame {
 
 	private static final long serialVersionUID = -6130863801226700401L;
 	private JPanel contentPane;
-	private JTextField localPathText;
-	
+	final private JTextPane localPathText;
+	final private JTextPane usernameText;
 
 	/**
 	 * Launch the application.
@@ -55,30 +54,44 @@ public class Application extends JFrame {
 		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.CENTER);
 		
-		final JTextPane textPane = new JTextPane();
-		textPane.setToolTipText("Your username");
-		textPane.setText(Fileshare.getInstance().getUser().getUsername());
-		textPane.setEditable(false);
-		textPane.setBackground(Color.WHITE);
+		usernameText = new JTextPane();
+		usernameText.setToolTipText("Your username");
+		usernameText.setText(Fileshare.getInstance().getUser().getUsername());
+		usernameText.setEditable(false);
+		usernameText.setBackground(Color.WHITE);
 		
 		JButton setusernamebtn = new JButton("change");
 		setusernamebtn.setToolTipText("Click to change your username");
+		setusernamebtn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChangeUsername.getInstance(usernameText).setVisible(true);
+			}
+			
+		});
 		
-		localPathText = new JTextField();
+		localPathText = new JTextPane();
+		localPathText.setBackground(Color.WHITE);
 		localPathText.setEditable(false);
 		localPathText.setToolTipText("Path to your shared folder");
 		localPathText.setText(Fileshare.getInstance().getUser().getPath());
-		localPathText.setColumns(20);
 		
 		JButton changelocalpathbtn = new JButton("change");
 		changelocalpathbtn.setToolTipText("Click to change your local path");
+		changelocalpathbtn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChangeLocalPath.getInstance(localPathText).setVisible(true);
+			}
+			
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(textPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(usernameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(localPathText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(181)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -92,7 +105,7 @@ public class Application extends JFrame {
 					.addGap(14)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(textPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(usernameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(9))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(setusernamebtn)
@@ -103,13 +116,7 @@ public class Application extends JFrame {
 					.addContainerGap(187, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
-		setusernamebtn.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ChangeUsername.getInstance(textPane).setVisible(true);
-			}
-			
-		});
+		
 		
 		this.pack();
 	}
