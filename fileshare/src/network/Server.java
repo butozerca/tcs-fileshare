@@ -1,3 +1,4 @@
+package network;
 import java.io.*;
 import java.net.*;
 
@@ -29,5 +30,16 @@ public class Server extends Thread {
 				break;
 			}
 		}
+	}
+	
+	public static void main(String args[]){
+		Server serv = null;
+		try {
+			 serv = new Server(23443);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		serv.run();
+		
 	}
 }

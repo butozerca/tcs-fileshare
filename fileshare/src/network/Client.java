@@ -1,3 +1,4 @@
+package network;
 import java.io.IOException;
 import java.io.*;
 import java.net.Socket;
@@ -35,4 +36,11 @@ public class Client {
 		}
 		return reply;
 	}
+	
+	public static void main(String args[]){
+		
+	//	Client cli = new Client();
+		
+	}
+	
 }

@@ -2,6 +2,8 @@ import java.awt.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 
+import visual.Application;
+
 
 public class Main {
     /**

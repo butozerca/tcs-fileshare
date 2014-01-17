@@ -1,3 +1,6 @@
+package visual;
+import model.Fileshare;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
