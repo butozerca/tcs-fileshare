@@ -17,7 +17,7 @@ public class Fileshare extends Observable {
 
 	private static Fileshare instance = null;
 	private User user = null;
-	private String savePath = "saved";
+	private String savePath = "filesharestate.save";
 	
 	private Fileshare(){
 		if(!loadFromFile(savePath))

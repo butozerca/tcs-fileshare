@@ -63,7 +63,7 @@ public class Application extends JFrame {
 		usernameText.setEditable(false);
 		usernameText.setBackground(Color.WHITE);
 		
-		JButton setusernamebtn = new JButton("change");
+		JButton setusernamebtn = new JButton("Change name");
 		setusernamebtn.setToolTipText("Click to change your username");
 		setusernamebtn.addActionListener(new ActionListener(){
 			@Override
@@ -79,7 +79,7 @@ public class Application extends JFrame {
 		localPathText.setToolTipText("Path to your shared folder");
 		localPathText.setText(Fileshare.getInstance().getUser().getPath());
 		
-		JButton changelocalpathbtn = new JButton("change");
+		JButton changelocalpathbtn = new JButton("Change path");
 		changelocalpathbtn.setToolTipText("Click to change your local path");
 		changelocalpathbtn.addActionListener(new ActionListener(){
 			@Override
@@ -88,19 +88,60 @@ public class Application extends JFrame {
 			}
 			
 		});
+		
+		JButton btnNewButton = new JButton("Save");
+		btnNewButton.setToolTipText("Save state of this app");
+		btnNewButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Fileshare.getInstance().saveToFile();
+			}
+			
+		});
+		
+		JTextPane textPane = new JTextPane();
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setToolTipText("Enter a file to search in your network");
+		
+		btnSearch.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SearchFile.getInstance().setVisible(true);
+			}
+		});
+		
+		JButton btnJoinNetwork = new JButton("Join a network");
+		btnJoinNetwork.setToolTipText("Click to join a network");
+		btnJoinNetwork.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JoinNetwork.getInstance().setVisible(true);
+			}
+		});
+		
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(usernameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(localPathText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(181)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(changelocalpathbtn)
-						.addComponent(setusernamebtn))
-					.addContainerGap())
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(usernameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(localPathText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(181)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(changelocalpathbtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(setusernamebtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btnSearch)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnJoinNetwork))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -116,11 +157,19 @@ public class Application extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(localPathText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(changelocalpathbtn))
-					.addContainerGap(187, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNewButton)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSearch))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnJoinNetwork)
+					.addContainerGap(100, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		
-		
+		this.setResizable(false);
 		this.pack();
 	}
 }

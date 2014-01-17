@@ -1,12 +1,14 @@
 package model;
 import java.io.Serializable;
 
-
+/*
+ * Klasa opisujaca uzytkownika aplikacji.
+ */
 
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = -2326346525021577409L;
-	private String username = "No Username";
+	private String username = "No username";
 	private String localPath = "shared/";
 	
 	public User(){
@@ -27,8 +29,6 @@ public class User implements Serializable {
 	public String getPath(){
 		return localPath;
 	}
-	/*
-	 * Klasa opisujaca uzytkownika aplikacji.
-	 */
+	
 
 }

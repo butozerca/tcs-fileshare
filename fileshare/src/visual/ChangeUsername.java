@@ -68,6 +68,7 @@ public class ChangeUsername extends JFrame {
 		});
 		this.pack();
 		this.setAlwaysOnTop(true);
+		this.setResizable(false);
 	}
 	
 	public static ChangeUsername getInstance(JTextPane textPane){

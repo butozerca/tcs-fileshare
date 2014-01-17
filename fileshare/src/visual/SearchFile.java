@@ -1,26 +1,24 @@
 package visual;
 
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import model.Fileshare;
 
-public class ChangeLocalPath extends JFrame {
+public class SearchFile extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5724407693366871196L;
-	private static ChangeLocalPath instance = null;
+	private static SearchFile instance = null;
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -28,8 +26,8 @@ public class ChangeLocalPath extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	private ChangeLocalPath(final JTextPane textPane) {
-		setTitle("Change your local path");
+	private SearchFile() {
+		setTitle("Search for a file");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,11 +56,7 @@ public class ChangeLocalPath extends JFrame {
 		btnOK.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(validatePath(textField.getText())){
-					Fileshare.getInstance().getUser().setPath(textField.getText());
-					System.out.println("Local path changed to " + textField.getText());
-					textPane.setText(Fileshare.getInstance().getUser().getPath());
-				}
+				// TODO: jakos podlaczyc to do reszty
 				dispose();
 			}
 		});
@@ -71,16 +65,10 @@ public class ChangeLocalPath extends JFrame {
 		this.setResizable(false);
 	}
 	
-	public static ChangeLocalPath getInstance(JTextPane textPane){
+	public static SearchFile getInstance(){
 		if(instance == null)
-			instance = new ChangeLocalPath(textPane);
+			instance = new SearchFile();
 		return instance;
-	}
-	
-	private boolean validatePath(String text){
-		if(Pattern.compile("([a-zA-Z0-9]+/)+").matcher(text).matches())
-			return true;
-		return false;
 	}
 	
 }
