@@ -21,7 +21,7 @@ public class Server extends Thread {
 				Socket server = serverSocket.accept();
 				DataInputStream in = new DataInputStream(server.getInputStream());
 				String query = in.readUTF();
-				System.out.println("Received query: " + query);
+				System.out.println("Server received query: " + query);
 				DataOutputStream out = new DataOutputStream(server.getOutputStream());
 				out.writeUTF("This is my 1 response\n" + "And 2 response\n");
 				server.close();
@@ -32,14 +32,15 @@ public class Server extends Thread {
 		}
 	}
 	
-	public static void main(String args[]){
-		Server serv = null;
+	public static void main(String args[]) {
 		try {
-			 serv = new Server(23443);
+			 Server serv = new Server(23443);
+			 serv.setDaemon(true);
+			 serv.start();
+			 Client cl = new Client("localhost", 23443, "what's up?");
+			 System.out.println("Client got:\n" + cl.getReply());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		serv.run();
-		
 	}
 }
