@@ -22,8 +22,10 @@ public class Server extends Thread {
 				DataInputStream in = new DataInputStream(server.getInputStream());
 				String query = in.readUTF();
 				System.out.println("Server received query: " + query);
+				//TODO Zapewnic obsluge protokolow
 				DataOutputStream out = new DataOutputStream(server.getOutputStream());
-				out.writeUTF("This is my 1 response\n" + "And 2 response\n");
+				out.writeUTF("ftp://176.23.34.2:34533/plik.txt\n" + 
+						"ftp://176.26.64.42:12553/tmp/plik.txt");
 				server.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -33,14 +35,6 @@ public class Server extends Thread {
 	}
 	
 	public static void main(String args[]) {
-		try {
-			 Server serv = new Server(23443);
-			 serv.setDaemon(true);
-			 serv.start();
-			 Client cl = new Client("localhost", 23443, "what's up?");
-			 System.out.println("Client got:\n" + cl.getReply());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 }

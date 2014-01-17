@@ -1,10 +1,9 @@
 package network;
-import java.io.IOException;
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client {
+public abstract class Client {
 
 	/**
 	 * Klasa odpowiedzialna za wysylanie requestow i odbieranie danych
@@ -20,7 +19,13 @@ public class Client {
 		this.query = query;
 	}
 
-	public String getReply() {
+	/**
+	 * Konwertuje tekstowa odpowiedz na odpowiedni obiekt.
+	 * Powinna korzystac z metody getReply.
+	 */
+	public abstract Object getContent();
+
+	protected String getReply() {
 		String reply = null;
 		try {
 			Socket client = new Socket(serverAddress, destPort);
