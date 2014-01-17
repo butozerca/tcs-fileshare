@@ -8,19 +8,20 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import model.Fileshare;
 
-public class ChangeLocalPath extends JFrame {
+public class ChangeUsernameBox extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5724407693366871196L;
-	private static ChangeLocalPath instance = null;
+	private static ChangeUsernameBox instance = null;
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -28,8 +29,8 @@ public class ChangeLocalPath extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	private ChangeLocalPath(final JTextPane textPane) {
-		setTitle("Change your local path");
+	private ChangeUsernameBox(final JTextPane textPane) {
+		setTitle("Change your username");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,10 +59,10 @@ public class ChangeLocalPath extends JFrame {
 		btnOK.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(validatePath(textField.getText())){
-					Fileshare.getInstance().getUser().setPath(textField.getText());
-					System.out.println("Local path changed to " + textField.getText());
-					textPane.setText(Fileshare.getInstance().getUser().getPath());
+				if(validateName(textField.getText())){
+					Fileshare.getInstance().getUser().setUsername(textField.getText());
+					System.out.println("Username changed to " + textField.getText());
+					textPane.setText(Fileshare.getInstance().getUser().getUsername());
 				}
 				dispose();
 			}
@@ -69,16 +70,17 @@ public class ChangeLocalPath extends JFrame {
 		this.pack();
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
-	public static ChangeLocalPath getInstance(JTextPane textPane){
+	public static ChangeUsernameBox getInstance(JTextPane textPane){
 		if(instance == null)
-			instance = new ChangeLocalPath(textPane);
+			instance = new ChangeUsernameBox(textPane);
 		return instance;
 	}
 	
-	private boolean validatePath(String text){
-		if(Pattern.compile("([a-zA-Z0-9]+/)+").matcher(text).matches())
+	private boolean validateName(String text){
+		if(Pattern.compile("[a-zA-Z0-9]+").matcher(text).matches())
 			return true;
 		return false;
 	}

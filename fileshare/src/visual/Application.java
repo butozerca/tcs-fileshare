@@ -68,7 +68,7 @@ public class Application extends JFrame {
 		setusernamebtn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangeUsername.getInstance(usernameText).setVisible(true);
+				ChangeUsernameBox.getInstance(usernameText).setVisible(true);
 			}
 			
 		});
@@ -84,7 +84,7 @@ public class Application extends JFrame {
 		changelocalpathbtn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangeLocalPath.getInstance(localPathText).setVisible(true);
+				ChangeLocalPathBox.getInstance(localPathText).setVisible(true);
 			}
 			
 		});
@@ -107,7 +107,7 @@ public class Application extends JFrame {
 		btnSearch.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				SearchFile.getInstance().setVisible(true);
+				SearchFileBox.getInstance().setVisible(true);
 			}
 		});
 		
@@ -116,7 +116,7 @@ public class Application extends JFrame {
 		btnJoinNetwork.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JoinNetwork.getInstance().setVisible(true);
+				JoinNetworkBox.getInstance().setVisible(true);
 			}
 		});
 		

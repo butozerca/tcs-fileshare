@@ -7,18 +7,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 
-public class SearchFile extends JFrame {
+public class JoinNetworkBox extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5724407693366871196L;
-	private static SearchFile instance = null;
+	private static JoinNetworkBox instance = null;
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -26,8 +27,8 @@ public class SearchFile extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	private SearchFile() {
-		setTitle("Search for a file");
+	private JoinNetworkBox() {
+		setTitle("Join a network");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,18 +57,19 @@ public class SearchFile extends JFrame {
 		btnOK.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: jakos podlaczyc to do reszty
+				// TODO: jakos podlaczyc to do sieci
 				dispose();
 			}
 		});
 		this.pack();
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
+		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
-	public static SearchFile getInstance(){
+	public static JoinNetworkBox getInstance(){
 		if(instance == null)
-			instance = new SearchFile();
+			instance = new JoinNetworkBox();
 		return instance;
 	}
 	
