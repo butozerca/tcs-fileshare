@@ -38,6 +38,21 @@ public class FileSearchClient {
 		return reply.toString();
 	}
 	
+	public ArrayList<URL> getContent() {
+		ArrayList<URL> res = new ArrayList<>();
+		String reply = this.getReply();
+		String[] urls = reply.split("\n");
+		for(String u : urls) {
+			try {
+				res.add(new URL(u));
+			} catch (MalformedURLException e) {
+				System.out.println("Malformed URL: " + u);
+				e.printStackTrace();
+			}
+		}
+		return res;
+	}
+
 	public static void main(String[] args) throws IOException {
 		ArrayList<ServerAdress> n0 = new ArrayList<>();
 		n0.add(new ServerAdress("0.0.0.0", 23000));
@@ -68,10 +83,13 @@ public class FileSearchClient {
 			s.setDaemon(true);
 			s.start();
 		}
-		FileSearchQuery que = new FileSearchQuery("0.0.0.0:23000:user.txt:3");
+		FileSearchQuery que = new FileSearchQuery("0.0.0.0:23000:File:1");
 		ArrayList<ServerAdress> hosts = new ArrayList<>();
 		hosts.add(new ServerAdress("0.0.0.0", 25000));
 		FileSearchClient cl = new FileSearchClient(hosts, que);
-		System.out.println(cl.getReply());
+		ArrayList<URL> urls = cl.getContent();
+		for(URL u : urls) {
+			System.out.println(u);
+		}
 	}
 }

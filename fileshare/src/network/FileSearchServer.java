@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import common.SearchFile;
+
 public class FileSearchServer extends Thread {
 	private ServerSocket serverSocket;
 	private ArrayList<ServerAdress> neighbours;
@@ -26,7 +28,11 @@ public class FileSearchServer extends Thread {
 				System.out.println("Server received query: " + query);
 				
 				PrintWriter out = new PrintWriter(server.getOutputStream(), true);
-				out.println("Hello from " + serverSocket.getLocalSocketAddress());
+				//TODO podpiac sharowany folder do zapytania
+				ArrayList<String> files = SearchFile.searchFile(query.getFilename(), "fileshare/src/");
+				for(String file : files) {
+					out.println("ftp://" + serverSocket.getInetAddress().getHostAddress() + file);
+				}
 				if(query.getTtl() > 0) {
 					ArrayList<ServerAdress> dests = new ArrayList<>(neighbours);
 					dests.remove(query.getSender());
