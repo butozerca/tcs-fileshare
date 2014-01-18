@@ -36,7 +36,7 @@ public class NetworkManager implements Serializable {
 		
 		if(TTL > 0){
 			for(ServerAdress sa : thisBlock){
-				if(!sa.equals(parent)){
+				if(!sa.equals(parent) && !sa.equals(myAdress)){
 					//TODO: wyslij mu wiadomosc z TTL = 0 i odbierz ja do jakiejs struktury
 				}
 			}
