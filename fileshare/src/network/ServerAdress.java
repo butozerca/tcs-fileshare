@@ -13,6 +13,14 @@ public class ServerAdress implements Serializable {
 		this.destPort = destPort;
 	}
 
+	public boolean equals(Object o){
+		ServerAdress other = (ServerAdress)o;
+		if(this.adress == other.adress && this.destPort == other.destPort)
+			return true;
+		else 
+			return false;
+	}
+	
 	public String toString(){
 		return new String(adress + " " + destPort);
 	}
