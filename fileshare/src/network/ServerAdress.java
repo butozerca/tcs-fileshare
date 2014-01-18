@@ -15,7 +15,7 @@ public class ServerAdress implements Serializable {
 
 	public boolean equals(Object o){
 		ServerAdress other = (ServerAdress)o;
-		if(this.adress == other.adress && this.destPort == other.destPort)
+		if(this.adress.equals(other.adress) && this.destPort == other.destPort)
 			return true;
 		else 
 			return false;
