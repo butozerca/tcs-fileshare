@@ -1,8 +1,6 @@
 package model;
 import java.io.Serializable;
 
-import network.NetworkManager;
-
 /*
  * Klasa opisujaca uzytkownika aplikacji.
  */
@@ -12,7 +10,6 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -2326346525021577409L;
 	private String username = "No username";
 	private String localPath = "shared/";
-	private NetworkManager networkManager;
 	
 	public User(){
 	}
