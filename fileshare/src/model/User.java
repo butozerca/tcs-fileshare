@@ -8,10 +8,16 @@ import java.io.Serializable;
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = -2326346525021577409L;
-	private String username = "No username";
-	private String localPath = "shared/";
+	private String username;
+	private String localPath;
 	
 	public User(){
+		username = "No username";
+		localPath = "shared";
+		if(System.getProperty("os.name").startsWith("Windows"))
+			localPath += "\\";
+		else
+			localPath += "/";
 	}
 	
 	public void setUsername(String username){
