@@ -25,7 +25,7 @@ public class FileSearchServer extends Thread {
 						new InputStreamReader(server.getInputStream()));
 				String line = in.readLine();
 				FileSearchQuery query = new FileSearchQuery(line);
-				System.out.println("Server received query: " + query);
+				System.out.println("Server " + serverSocket.getLocalPort() + " received query: " + query);
 				
 				PrintWriter out = new PrintWriter(server.getOutputStream(), true);
 				//TODO podpiac sharowany folder do zapytania

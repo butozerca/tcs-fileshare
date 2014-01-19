@@ -10,8 +10,8 @@ public class SearchFile {
     {
 		File file = new File(directory);
         File[] list = file.listFiles();
-        if(list.length == 0) return null;
         ArrayList<String> res = new ArrayList<String>(), ret;
+        if(list == null || list.length == 0) return res;
         
         for (File fil : list) {
         	if( fil.isDirectory() ){
