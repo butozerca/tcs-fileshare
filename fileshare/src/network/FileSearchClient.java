@@ -38,59 +38,55 @@ public class FileSearchClient {
 		return reply.toString();
 	}
 	
-	public ArrayList<URL> getContent() {
-		ArrayList<URL> res = new ArrayList<>();
+	public ArrayList<String> getContent() {
+		ArrayList<String> res = new ArrayList<>();
 		String reply = this.getReply();
-		String[] urls = reply.split("\n");
-		for(String u : urls) {
-			System.out.println(u.length());
-			try {
-				res.add(new URL(u));
-			} catch (MalformedURLException e) {
-				System.out.println("Malformed URL: \"" + u + "\"");
-				e.printStackTrace();
-			}
+		if(reply.length() == 0)
+			return res;
+		String[] strings = reply.split("\n");
+		for(String s : strings) {
+			res.add(s);
 		}
 		return res;
 	}
 
 	public static void main(String[] args) throws IOException {
 		ArrayList<ServerAdress> n0 = new ArrayList<>();
-		n0.add(new ServerAdress("0.0.0.0", 33000));
-		n0.add(new ServerAdress("0.0.0.0", 35001));
-		n0.add(new ServerAdress("0.0.0.0", 35002));
+		n0.add(new ServerAdress("0.0.0.0", 23200));
+		n0.add(new ServerAdress("0.0.0.0", 25201));
+		n0.add(new ServerAdress("0.0.0.0", 25202));
 		ArrayList<ServerAdress> n1 = new ArrayList<>();
-		n1.add(new ServerAdress("0.0.0.0", 35000));
+		n1.add(new ServerAdress("0.0.0.0", 25200));
 		ArrayList<ServerAdress> n2 = new ArrayList<>();
-		n2.add(new ServerAdress("0.0.0.0", 35000));
-		n2.add(new ServerAdress("0.0.0.0", 35003));
-		n2.add(new ServerAdress("0.0.0.0", 35004));
+		n2.add(new ServerAdress("0.0.0.0", 25200));
+		n2.add(new ServerAdress("0.0.0.0", 25203));
+		n2.add(new ServerAdress("0.0.0.0", 25204));
 		ArrayList<ServerAdress> n3 = new ArrayList<>();
-		n3.add(new ServerAdress("0.0.0.0", 35002));
-		n3.add(new ServerAdress("0.0.0.0", 35005));
+		n3.add(new ServerAdress("0.0.0.0", 25202));
+		n3.add(new ServerAdress("0.0.0.0", 25205));
 		ArrayList<ServerAdress> n4 = new ArrayList<>();
-		n4.add(new ServerAdress("0.0.0.0", 35002));
+		n4.add(new ServerAdress("0.0.0.0", 25202));
 		ArrayList<ServerAdress> n5 = new ArrayList<>();
-		n5.add(new ServerAdress("0.0.0.0", 35003));
+		n5.add(new ServerAdress("0.0.0.0", 25203));
 		FileSearchServer[] servers = {
-			new FileSearchServer(35000, n0),
-			new FileSearchServer(35001, n1),
-			new FileSearchServer(35002, n2),
-			new FileSearchServer(35003, n3),
-			new FileSearchServer(35004, n4),
-			new FileSearchServer(35005, n5)
+			new FileSearchServer(25200, n0),
+			new FileSearchServer(25201, n1),
+			new FileSearchServer(25202, n2),
+			new FileSearchServer(25203, n3),
+			new FileSearchServer(25204, n4),
+			new FileSearchServer(25205, n5)
 		};
 		for(FileSearchServer s : servers) {
 			s.setDaemon(true);
 			s.start();
 		}
-		FileSearchQuery que = new FileSearchQuery("0.0.0.0:33000:File:2");
+		FileSearchQuery que = new FileSearchQuery("0.0.0.0:23200:File:2");
 		ArrayList<ServerAdress> hosts = new ArrayList<>();
-		hosts.add(new ServerAdress("0.0.0.0", 35000));
+		hosts.add(new ServerAdress("0.0.0.0", 25200));
 		FileSearchClient cl = new FileSearchClient(hosts, que);
-		ArrayList<URL> urls = cl.getContent();
-		for(URL u : urls) {
-			System.out.println(u);
+		ArrayList<String> strings = cl.getContent();
+		for(String s : strings) {
+			System.out.println(s);
 		}
 	}
 }

@@ -19,6 +19,7 @@ public class Fileshare extends Observable {
 	private User user = null;
 	private String savePath = "filesharestate.save";
 	
+	
 	private Fileshare(){
 		if(!loadFromFile(savePath))
 			user = new User();
@@ -63,6 +64,10 @@ public class Fileshare extends Observable {
     		e.printStackTrace();
     	}
     	return false;
+    }
+    
+    public static String getSharedPath(){
+    	return getInstance().getUser().getPath();
     }
     
 }
