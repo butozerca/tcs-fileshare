@@ -12,6 +12,10 @@ public class AdressBlock extends ArrayList<ServerAdress> {
 		super();
 	}
 	
+	public AdressBlock(AdressBlock other){
+		super(other);
+	}
+	
 	public ServerAdress getRandom(){
 		if(this.size() == 0)
 			return null;

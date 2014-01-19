@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class FileSearchClient {
 
-	private ArrayList<ServerAdress> neighbours;
+	private AdressBlock neighbours;
 	private FileSearchQuery query;
 	
-	public FileSearchClient(ArrayList<ServerAdress> neighbours, FileSearchQuery query) {
+	public FileSearchClient(AdressBlock neighbours, FileSearchQuery query) {
 		this.neighbours = neighbours;
 		this.query = query;
 	}
@@ -51,22 +51,22 @@ public class FileSearchClient {
 	}
 
 	public static void main(String[] args) throws IOException {
-		ArrayList<ServerAdress> n0 = new ArrayList<>();
+		AdressBlock n0 = new AdressBlock();
 		n0.add(new ServerAdress("0.0.0.0", 23300));
 		n0.add(new ServerAdress("0.0.0.0", 25301));
 		n0.add(new ServerAdress("0.0.0.0", 25302));
-		ArrayList<ServerAdress> n1 = new ArrayList<>();
+		AdressBlock n1 = new AdressBlock();
 		n1.add(new ServerAdress("0.0.0.0", 25300));
-		ArrayList<ServerAdress> n2 = new ArrayList<>();
+		AdressBlock n2 = new AdressBlock();
 		n2.add(new ServerAdress("0.0.0.0", 25300));
 		n2.add(new ServerAdress("0.0.0.0", 25303));
 		n2.add(new ServerAdress("0.0.0.0", 25304));
-		ArrayList<ServerAdress> n3 = new ArrayList<>();
+		AdressBlock n3 = new AdressBlock();
 		n3.add(new ServerAdress("0.0.0.0", 25302));
 		n3.add(new ServerAdress("0.0.0.0", 25305));
-		ArrayList<ServerAdress> n4 = new ArrayList<>();
+		AdressBlock n4 = new AdressBlock();
 		n4.add(new ServerAdress("0.0.0.0", 25302));
-		ArrayList<ServerAdress> n5 = new ArrayList<>();
+		AdressBlock n5 = new AdressBlock();
 		n5.add(new ServerAdress("0.0.0.0", 25303));
 		FileSearchServer[] servers = {
 			new FileSearchServer(25300, n0),
@@ -81,7 +81,7 @@ public class FileSearchClient {
 			s.start();
 		}
 		FileSearchQuery que = new FileSearchQuery("0.0.0.0:23300:File:2");
-		ArrayList<ServerAdress> hosts = new ArrayList<>();
+		AdressBlock hosts = new AdressBlock();
 		hosts.add(new ServerAdress("0.0.0.0", 25300));
 		FileSearchClient cl = new FileSearchClient(hosts, que);
 		ArrayList<String> strings = cl.getContent();
