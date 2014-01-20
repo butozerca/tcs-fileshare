@@ -37,7 +37,8 @@ public class FileSearchServerThread extends Thread {
 			if(query.getTtl() > 0) {
 				AdressBlock dests = new AdressBlock(neighbours);
 				dests.remove(query.getSender());
-				ServerAdress newSender = new ServerAdress(socket.getInetAddress().getHostAddress(), socket.getLocalPort());
+				ServerAdress newSender = new ServerAdress(socket.getInetAddress().getHostAddress(), socket.getLocalPort(), 0);
+				//TODO: podpiac numer portu serwera file
 				FileSearchQuery newQuery = new FileSearchQuery(newSender, query.getFilename(), query.getTtl()-1);
 				FileSearchClient cl = new FileSearchClient(dests, newQuery);
 				out.print(cl.getReply());

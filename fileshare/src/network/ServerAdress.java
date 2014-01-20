@@ -6,22 +6,24 @@ public class ServerAdress implements Serializable {
 	
 	private static final long serialVersionUID = -7204732772252817997L;
 	public String adress;
-	public int destPort;
+	public int destPortSearch;
+	public int destPortFile;
 	
-	public ServerAdress(String adress, int destPort){
+	public ServerAdress(String adress, int destPortSearch, int destPortFile){
 		this.adress = adress;
-		this.destPort = destPort;
+		this.destPortSearch = destPortSearch;
+		this.destPortFile = destPortFile;
 	}
 
 	public boolean equals(Object o){
 		ServerAdress other = (ServerAdress)o;
-		if(this.adress.equals(other.adress) && this.destPort == other.destPort)
+		if(this.adress.equals(other.adress) && this.destPortSearch == other.destPortSearch)
 			return true;
 		else 
 			return false;
 	}
 	
 	public String toString(){
-		return new String(adress + " " + destPort);
+		return new String(adress + " " + destPortSearch);
 	}
 }
