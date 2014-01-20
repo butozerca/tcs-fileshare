@@ -16,7 +16,7 @@ public class User implements Serializable {
 	
 	public User(){
 		username = "No username";
-		localPath = "shared";
+		localPath = "fileshare/shared";
 		if(System.getProperty("os.name").startsWith("Windows"))
 			localPath += "\\";
 		else
