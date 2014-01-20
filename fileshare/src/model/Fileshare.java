@@ -17,7 +17,7 @@ public class Fileshare extends Observable {
 
 	private static Fileshare instance = null;
 	private User user = null;
-	private String savePath = "filesharestate.save";
+	private String savePath = "save/filesharestate.save";
 	
 	
 	private Fileshare(){
@@ -41,9 +41,9 @@ public class Fileshare extends Observable {
 	
     public void saveToFile(){
     	try {
-    		Files.deleteIfExists(Paths.get("save/" + savePath));
+    		Files.deleteIfExists(Paths.get(savePath));
     		new File("save/").mkdirs();
-    		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("save/" + savePath));
+    		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(savePath));
     		oos.writeObject(user);
     		oos.close();
 		} catch (Exception e) {
@@ -53,8 +53,8 @@ public class Fileshare extends Observable {
     
     public boolean loadFromFile(String loadPath){
     	try{
-    		if(Files.exists(Paths.get("save/" + loadPath))){
-    			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("save/" + loadPath));
+    		if(Files.exists(Paths.get(loadPath))){
+    			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(loadPath));
     			user = (User)ois.readObject();
     			ois.close();
     			return true;
