@@ -12,6 +12,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import network.FileSearchClient;
+import network.FileSearchQuery;
+import network.NetworkManager;
+import model.Fileshare;
+
 
 public class SearchFileBox extends JFrame {
 
@@ -54,7 +59,13 @@ public class SearchFileBox extends JFrame {
 		btnOK.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: jakos podlaczyc to do reszty
+				String filename = textField.getText();
+				NetworkManager sender = Fileshare.getInstance().getUser().getManager();
+				FileSearchQuery query = new FileSearchQuery(sender.getAdress(), filename, 3);
+				FileSearchClient cl = new FileSearchClient(sender.getNeighbours(), query);
+				System.out.println(query);
+				System.out.println(cl.getContent());
+				//TODO zrobic okienko z wyswietlonymi wynikami zapytania
 				dispose();
 			}
 		});

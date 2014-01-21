@@ -11,8 +11,8 @@ public class NetworkManager implements Serializable {
 	
 	private static final long serialVersionUID = 1220500879358120053L;
 	
-	private ServerAdress myAdress = null;
-	private AdressBlock neighbours;
+	private ServerAdress myAdress = new ServerAdress("0.0.0.0", 20000, 21000);
+	private AdressBlock neighbours = new AdressBlock();
 	
 	public NetworkManager(){
 		
@@ -44,7 +44,11 @@ public class NetworkManager implements Serializable {
 		return myAdress;
 	}
 	
-	public void setNeighbour(AdressBlock ab){
+	public AdressBlock getNeighbours() {
+		return neighbours;
+	};
+	
+	public void setNeighbours(AdressBlock ab){
 		this.neighbours = ab;
 	}
 	
