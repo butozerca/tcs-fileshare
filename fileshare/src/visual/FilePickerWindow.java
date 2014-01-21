@@ -48,6 +48,7 @@ public class FilePickerWindow extends JFrame {
 	}
 	
 	private FilePickerWindow(ArrayList<String> fileAdresses) {
+		setTitle("Pick files you wish to download");
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -113,7 +114,7 @@ public class FilePickerWindow extends JFrame {
 				}
 			});
 		panel.add(btnNewButton_1);
-		
+		this.pack();
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
