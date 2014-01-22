@@ -1,0 +1,25 @@
+1. Protokół zapytania o plik
+
+Zapytanie tekstowe jest następującej postaci: adres_pytajacego:port_pytajacego:nazwa_pliku:ttl
+
+Odpowiedzią jest wieloliniowy String, każda linia zawiera 2 informacje: adres maszyny, z którą należy się połączyć by pobrać plik oraz ścieżkę do tego pliku.
+
+Klient nawiązuje połączenie ze wszystkimi znanymi mu hostami, wysyłając jedną linię zawierającą zapytanie. Jeśli ttl = 0, to serwer po otrzymaniu zapytania zwraca listę dopasowanych plików, znajdujących się w jego lokalnym folderze i zamyka połączenie. Jeśli ttl > 0, to serwer podmienia adres i port pytającego na swój i rekurencyjnie wysyła zapytania do wszystkich swoich sąsiadów, z wyłączeniem tego, od którego zapytanie przyszło. Następnie zwraca skumulowane odpowiedzi do pytającego.
+
+
+2. Protokół przesyłania pliku
+
+Klient wysyła zapytanie do odpowiedniego hosta na podstawie wyników, które uzyskał za pomocą protokołu zapytania o plik. Klient nawiązuje połączenie z hostem bez pośrednich wierzchołków w drzewie. Serwer, po otrzymaniu zapytania wyszukuje podany plik w swoim lokalnym, udostępnianym folderze, szyfruje go, a następnie wysyła do klienta. Po odszyfrowaniu, plik zapisywany jest w lokalnym folderze klienta.
+
+
+3. Protokół dodawania wierzchołka do sieci
+
+Zapytanie postaci: adres:port1:port2:port3
+adres - adres wierzchołka, który chce przyłączyć się do sieci
+port1 - port, na którym nowy wierzchołek będzie obsługiwał protokół zapytania o plik
+port2 - port, na którym nowy wierzchołek będzie obsługiwał protokół przesyłania pliku
+port3 - port, na którym nowy wierzchołek będzie obsługiwał protokół dodawania innych wierzchołków
+
+Odpowiedź: wieloliniowy String, każda linia postaci takiej jak w zapytaniu. Jest to zbiór opisujący hostów, które nowy wierzchołek zapisuje jako swoich sąsiadów.
+
+Klient nawiązuje połączenie i przesyła jedną linię z zapytaniem. Serwer sprawdza swoje otoczenie i jeśli może dołączyć nowy wierzchołek jako swojego sąsiada, robi to, zapisuje jego adres i numery portów, a następnie odpowiada klientowi, podając zbiór swoich sąsiadów wraz z nim samym. W przeciwnym razie przesyła zapytanie dalej i zwracane jest pierwsze możliwe miejsce dodania nowego wierzchołka.
