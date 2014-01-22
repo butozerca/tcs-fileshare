@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -17,6 +18,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+
+import network.FileTransferClient;
 
 public class FilePickerWindow extends JFrame {
 
@@ -98,7 +101,16 @@ public class FilePickerWindow extends JFrame {
 					for(int i = 0; i < lista.size(); ++i){
 						if(lista.get(i).isSelected()){
 							System.out.println("pobieranie: " + lista.get(i).getText());
-							//TODO: odpal pobieranie
+							String s = lista.get(i).getText();
+							String[] spl = s.split(":");
+							String que = spl[0] + ":" + spl[3];
+							FileTransferClient FTC;
+							try {
+								FTC = new FileTransferClient(que);
+								FTC.download();
+							} catch (MalformedURLException e1) {
+								e1.printStackTrace();
+							}
 						}
 					}
 					dispose();
