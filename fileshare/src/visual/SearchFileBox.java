@@ -66,6 +66,7 @@ public class SearchFileBox extends JFrame {
 				System.out.println(query);
 				System.out.println(cl.getContent());
 				//TODO zrobic okienko z wyswietlonymi wynikami zapytania
+				FilePickerWindow.getInstance(cl.getContent()).setVisible(true);
 				dispose();
 			}
 		});
