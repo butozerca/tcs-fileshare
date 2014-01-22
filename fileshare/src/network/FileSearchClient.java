@@ -4,16 +4,29 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
+/**
+ * Class provides client part of searching the network for a file protocol.
+ * Sender its neighbours if they have the needed file.
+ * @author michal2
+ */
+
 public class FileSearchClient {
 
 	private AdressBlock neighbours;
 	private FileSearchQuery query;
-	
+	/**
+	 * Creates the client.
+	 * @param neighbours
+	 * @param query
+	 */
 	public FileSearchClient(AdressBlock neighbours, FileSearchQuery query) {
 		this.neighbours = neighbours;
 		this.query = query;
 	}
-	
+	/**
+	 * Starts connection and waits for a response from the server.
+	 * @return String describing links to files which match the query.
+	 */
 	public String getReply() {
 		StringBuilder reply = new StringBuilder();
 		for(ServerAdress dest : neighbours) {
@@ -37,7 +50,10 @@ public class FileSearchClient {
 		}
 		return reply.toString();
 	}
-	
+	/**
+	 * Starts connection and waits for a response from the server.
+	 * @return List of links to files which match the query. 
+	 */
 	public ArrayList<String> getContent() {
 		ArrayList<String> res = new ArrayList<>();
 		String reply = this.getReply();
@@ -46,7 +62,7 @@ public class FileSearchClient {
 		String[] strings = reply.split("\n");
 		for(String s : strings) {
 			res.add(s);
-		}
+		} 
 		return res;
 	}
 

@@ -4,20 +4,16 @@ import java.net.ServerSocket;
 
 import visual.Application;
 
-
+/**
+ * Launches the application.
+ */
 public class Main {
-    /**
-     * Launches the application.
-     */
+    
 
     public static void main(String[] args) {
     	
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	
-            	/**
-            	 * 	Prevents application from being run more than once at a time
-            	 */
             	
             	try {
             		

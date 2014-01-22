@@ -10,12 +10,15 @@ import java.util.Observable;
 
 
 
-/*
- * Fileshare singleton
+/**
+ * Fileshare singleton class
  */
 public class Fileshare extends Observable {
 
 	private static Fileshare instance = null;
+	/**
+	 *  User associated with this instance
+	 */
 	private User user = null;
 	private String savePath = "save/filesharestate.save";
 	
@@ -24,6 +27,11 @@ public class Fileshare extends Observable {
 		if(!loadFromFile(savePath))
 			user = new User();
 	}
+	
+	/**
+	 * Returns a singleton of this class.
+	 * @return
+	 */
 	
 	public static Fileshare getInstance(){
 		if(instance == null)
@@ -39,6 +47,9 @@ public class Fileshare extends Observable {
 		return savePath;
 	}
 	
+	/**
+	 * Saves this instance to savepath.
+	 */
     public void saveToFile(){
     	try {
     		Files.deleteIfExists(Paths.get(savePath));
@@ -50,6 +61,12 @@ public class Fileshare extends Observable {
 			e.printStackTrace();
 		}
     }
+    
+    /**
+     * Tries to load a saved version of a user.
+     * @param loadPath
+     * @return True, if there was a loadable file under the loadpath, false otherwise.
+     */
     
     public boolean loadFromFile(String loadPath){
     	try{
@@ -66,6 +83,9 @@ public class Fileshare extends Observable {
     	return false;
     }
     
+    /**
+     * Shortcut to user's shared folder path.
+     */  
     public static String getSharedPath(){
     	return getInstance().getUser().getPath();
     }
