@@ -20,7 +20,11 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 
 import network.FileTransferClient;
-
+/**
+ * Frame allowing a user to pick which files he wishes to download.
+ * @author michal2
+ *
+ */
 public class FilePickerWindow extends JFrame {
 
 	/**
@@ -131,7 +135,11 @@ public class FilePickerWindow extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
-	
+	/**
+	 * Returns the current instance of this frame. New one if none exists.
+	 * @param textPane
+	 * @return
+	 */
 	public static FilePickerWindow getInstance(ArrayList<String> fileAdresses){
 		if(instance == null)
 			instance = new FilePickerWindow(fileAdresses);

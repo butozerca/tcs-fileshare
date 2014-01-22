@@ -17,7 +17,11 @@ import network.FileSearchQuery;
 import network.NetworkManager;
 import model.Fileshare;
 
-
+/**
+ * A frame which allows user to ask the network for a file.
+ * @author michal2
+ *
+ */
 public class SearchFileBox extends JFrame {
 
 	private static final long serialVersionUID = -5724407693366871196L;
@@ -74,7 +78,11 @@ public class SearchFileBox extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
-	
+	/**
+	 * Returns the current instance of this frame. New one if none exists.
+	 * @param textPane
+	 * @return
+	 */
 	public static SearchFileBox getInstance(){
 		if(instance == null)
 			instance = new SearchFileBox();

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import model.Fileshare;
 
 import common.SearchFile;
-
+/**
+ * 
+ */
 public class FileSearchServerThread extends Thread {
 	private Socket socket;
 	private AdressBlock neighbours;
@@ -38,7 +40,6 @@ public class FileSearchServerThread extends Thread {
 				AdressBlock dests = new AdressBlock(neighbours);
 				dests.remove(query.getSender());
 				ServerAdress newSender = new ServerAdress(socket.getInetAddress().getHostAddress(), socket.getLocalPort(), 0, 1);
-				//TODO: podpiac numer portu serwera file
 				FileSearchQuery newQuery = new FileSearchQuery(newSender, query.getFilename(), query.getTtl()-1);
 				FileSearchClient cl = new FileSearchClient(dests, newQuery);
 				out.print(cl.getReply());

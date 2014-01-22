@@ -14,12 +14,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import model.Fileshare;
-
+/**
+ * Frame allowing a user to change his shared folder path.
+ * @author michal2
+ *
+ */
 public class ChangeLocalPathBox extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5724407693366871196L;
 	private static ChangeLocalPathBox instance = null;
 	private JPanel contentPane;
@@ -72,7 +73,11 @@ public class ChangeLocalPathBox extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
-	
+	/**
+	 * Returns the current instance of this frame. New one if none exists.
+	 * @param textPane
+	 * @return
+	 */
 	public static ChangeLocalPathBox getInstance(JTextPane textPane){
 		if(instance == null)
 			instance = new ChangeLocalPathBox(textPane);

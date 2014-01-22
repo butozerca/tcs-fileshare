@@ -32,7 +32,7 @@ public class User implements Serializable {
 			localPath += "\\";
 		else
 			localPath += "/";
-		networkManager = new NetworkManager();
+		networkManager = new NetworkManager(this);
 	}
 	/**
 	 *  Sets the NetworkManager associated with this user.

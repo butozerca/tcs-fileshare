@@ -4,12 +4,19 @@ import java.io.*;
 import java.net.*;
 import javax.crypto.*;
 import javax.crypto.spec.DESKeySpec;
-
+/**
+ * Class provides client part of sending a file over the network.
+ * @author michal2
+ */
 public class FileTransferClient {
 	
 	private String address;
 	private File file;
-	
+	/**
+	 * Constructor.
+	 * @param query String consisting adress of the file and its name.
+	 * @throws MalformedURLException
+	 */
 	public FileTransferClient(String query) throws MalformedURLException {
 		String[] q = query.split(":");
 		if(q.length != 2)
@@ -18,10 +25,11 @@ public class FileTransferClient {
 		this.file = new File(q[1]);
 		System.out.println(file);
 	}
-	
+	/**
+	 * Starts download of a file.
+	 */
 	public void download() {
 		try {
-			//TODO dodac do query odpowiedni port i podpiac
 			Socket client = new Socket(address, 21000);
 			
 			PrintWriter out = new PrintWriter(client.getOutputStream(), true);

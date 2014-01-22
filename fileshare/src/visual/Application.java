@@ -17,7 +17,11 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-
+/**
+ * Application main class. Creates the main window in which one will operate. 
+ * @author michal2
+ *
+ */
 public class Application extends JFrame {
 
 	private static final long serialVersionUID = -6130863801226700401L;

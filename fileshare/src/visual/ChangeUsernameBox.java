@@ -14,12 +14,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import model.Fileshare;
-
+/**
+ * Frame allowing a user to change his username.
+ * @author michal2
+ *
+ */
 public class ChangeUsernameBox extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5724407693366871196L;
 	private static ChangeUsernameBox instance = null;
 	private JPanel contentPane;
@@ -72,13 +73,16 @@ public class ChangeUsernameBox extends JFrame {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
-	
+	/**
+	 * Returns the current instance of this frame. New one if none exists.
+	 * @param textPane
+	 * @return
+	 */
 	public static ChangeUsernameBox getInstance(JTextPane textPane){
 		if(instance == null)
 			instance = new ChangeUsernameBox(textPane);
 		return instance;
 	}
-	
 	private boolean validateName(String text){
 		if(Pattern.compile("[a-zA-Z0-9]+").matcher(text).matches())
 			return true;

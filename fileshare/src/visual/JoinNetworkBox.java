@@ -15,23 +15,23 @@ import javax.swing.JButton;
 
 import network.ServerAdress;
 
+/**
+ * A frame which allows user to connect to a network using an adress of a known other host.
+ * @author michal2
+ *
+ */
 
 public class JoinNetworkBox extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5724407693366871196L;
 	private static JoinNetworkBox instance = null;
 	private JPanel contentPane;
 	private JTextField adressField;
 	private JTextField portFieldSearch;
 	private JTextField portFieldFile;
+	private JTextField portFieldAdd;
 
 
-	/**
-	 * Create the frame.
-	 */
 	private JoinNetworkBox() {
 		setTitle("Join a network");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,13 +71,22 @@ public class JoinNetworkBox extends JFrame {
 		panel.add(portFieldFile);
 		portFieldFile.setColumns(7);
 		
+		portFieldAdd = new JTextField();
+		portFieldAdd.setToolTipText("Enter hosts' add port");
+		portFieldAdd.setText("port add");
+		panel.add(portFieldAdd);
+		portFieldAdd.setColumns(7);
+		
 		JButton btnOK = new JButton("OK");
 		panel.add(btnOK);
 		btnOK.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(verifyAdress(adressField.getText(), portFieldSearch.getText(), portFieldFile.getText())){
-					// TODO: jakos podlaczyc to do sieci
+					new ServerAdress(adressField.getText(), 
+							Integer.parseInt(portFieldSearch.getText()),
+							Integer.parseInt(portFieldFile.getText()),
+							Integer.parseInt(portFieldAdd.getText()));
 				}
 				dispose();
 			}
@@ -100,7 +109,11 @@ public class JoinNetworkBox extends JFrame {
 	private ServerAdress convert(String adresip, String portsearch, String portfile, String portadd){
 		return new ServerAdress(adresip, Integer.getInteger(portsearch), Integer.getInteger(portfile), Integer.getInteger(portadd));
 	}
-	
+	/**
+	 * Returns the current instance of this frame. New one if none exists.
+	 * @param textPane
+	 * @return
+	 */
 	public static JoinNetworkBox getInstance(){
 		if(instance == null)
 			instance = new JoinNetworkBox();
