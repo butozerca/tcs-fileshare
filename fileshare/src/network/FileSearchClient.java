@@ -52,22 +52,22 @@ public class FileSearchClient {
 
 	public static void main(String[] args) throws IOException {
 		AdressBlock n0 = new AdressBlock();
-		n0.add(new ServerAdress("0.0.0.0", 23300, 0));
-		n0.add(new ServerAdress("0.0.0.0", 25301, 0));
-		n0.add(new ServerAdress("0.0.0.0", 25302, 0));
+		n0.add(new ServerAdress("0.0.0.0", 23300, 0, 1));
+		n0.add(new ServerAdress("0.0.0.0", 25301, 0, 1));
+		n0.add(new ServerAdress("0.0.0.0", 25302, 0, 1));
 		AdressBlock n1 = new AdressBlock();
-		n1.add(new ServerAdress("0.0.0.0", 25300, 0));
+		n1.add(new ServerAdress("0.0.0.0", 25300, 0, 1));
 		AdressBlock n2 = new AdressBlock();
-		n2.add(new ServerAdress("0.0.0.0", 25300, 0));
-		n2.add(new ServerAdress("0.0.0.0", 25303, 0));
-		n2.add(new ServerAdress("0.0.0.0", 25304, 0));
+		n2.add(new ServerAdress("0.0.0.0", 25300, 0, 1));
+		n2.add(new ServerAdress("0.0.0.0", 25303, 0, 1));
+		n2.add(new ServerAdress("0.0.0.0", 25304, 0, 1));
 		AdressBlock n3 = new AdressBlock();
-		n3.add(new ServerAdress("0.0.0.0", 25302, 0));
-		n3.add(new ServerAdress("0.0.0.0", 25305, 0));
+		n3.add(new ServerAdress("0.0.0.0", 25302, 0, 1));
+		n3.add(new ServerAdress("0.0.0.0", 25305, 0, 1));
 		AdressBlock n4 = new AdressBlock();
-		n4.add(new ServerAdress("0.0.0.0", 25302, 0));
+		n4.add(new ServerAdress("0.0.0.0", 25302, 0, 1));
 		AdressBlock n5 = new AdressBlock();
-		n5.add(new ServerAdress("0.0.0.0", 25303, 0));
+		n5.add(new ServerAdress("0.0.0.0", 25303, 0, 1));
 		FileSearchServer[] servers = {
 			new FileSearchServer(25300, n0),
 			new FileSearchServer(25301, n1),
@@ -80,9 +80,9 @@ public class FileSearchClient {
 			s.setDaemon(true);
 			s.start();
 		}
-		FileSearchQuery que = new FileSearchQuery("0.0.0.0:23300:0:File:2");
+		FileSearchQuery que = new FileSearchQuery("0.0.0.0:23300:0:1:File:2");
 		AdressBlock hosts = new AdressBlock();
-		hosts.add(new ServerAdress("0.0.0.0", 25300, 0));
+		hosts.add(new ServerAdress("0.0.0.0", 25300, 0, 1));
 		FileSearchClient cl = new FileSearchClient(hosts, que);
 		ArrayList<String> strings = cl.getContent();
 		for(String s : strings) {

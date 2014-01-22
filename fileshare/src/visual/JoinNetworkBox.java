@@ -96,8 +96,8 @@ public class JoinNetworkBox extends JFrame {
 		else return false;
 	}
 	
-	private ServerAdress convert(String adresip, String portsearch, String portfile){
-		return new ServerAdress(adresip, Integer.getInteger(portsearch), Integer.getInteger(portfile));
+	private ServerAdress convert(String adresip, String portsearch, String portfile, String portadd){
+		return new ServerAdress(adresip, Integer.getInteger(portsearch), Integer.getInteger(portfile), Integer.getInteger(portadd));
 	}
 	
 	public static JoinNetworkBox getInstance(){

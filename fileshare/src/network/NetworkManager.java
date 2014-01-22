@@ -11,7 +11,7 @@ public class NetworkManager implements Serializable {
 	
 	private static final long serialVersionUID = 1220500879358120053L;
 	
-	private ServerAdress myAdress = new ServerAdress("0.0.0.0", 20000, 21000);
+	private ServerAdress myAdress = new ServerAdress("0.0.0.0", 20000, 21000, 22000);
 	private AdressBlock neighbours = new AdressBlock();
 	
 	public NetworkManager(){
