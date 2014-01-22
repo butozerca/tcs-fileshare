@@ -75,7 +75,7 @@ public class NetworkManager implements Serializable {
 	}
 	/**
 	 * Allows to change neighbour list of the user.
-	 * @param sa
+	 * @param ab
 	 */
 	public void setNeighbours(AdressBlock ab){
 		this.neighbours = ab;

@@ -137,7 +137,6 @@ public class FilePickerWindow extends JFrame {
 	}
 	/**
 	 * Returns the current instance of this frame. New one if none exists.
-	 * @param textPane
 	 * @return
 	 */
 	public static FilePickerWindow getInstance(ArrayList<String> fileAdresses){
