@@ -51,7 +51,6 @@ public class ServerAdress implements Serializable {
 	}
 	/**
 	 * Parses this class into a string.
-	 * @param line
 	 */
 	public String toString(){
 		return adress + ":" 

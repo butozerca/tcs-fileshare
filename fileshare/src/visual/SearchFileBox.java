@@ -80,7 +80,6 @@ public class SearchFileBox extends JFrame {
 	}
 	/**
 	 * Returns the current instance of this frame. New one if none exists.
-	 * @param textPane
 	 * @return
 	 */
 	public static SearchFileBox getInstance(){
