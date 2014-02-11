@@ -22,16 +22,7 @@ public class User implements Serializable {
 	 */
 	public User(){
 		username = "No username";
-		localPath = "fileshare";
-		if(System.getProperty("os.name").startsWith("Windows"))
-			localPath += "\\";
-		else
-			localPath += "/";
-		localPath += "shared";
-		if(System.getProperty("os.name").startsWith("Windows"))
-			localPath += "\\";
-		else
-			localPath += "/";
+		localPath = "fileshare" + getSystemSlash() + "shared" + getSystemSlash();
 		networkManager = new NetworkManager(this);
 	}
 	/**
@@ -71,5 +62,10 @@ public class User implements Serializable {
 		return localPath;
 	}
 	
-
+	private static String getSystemSlash(){
+		if(System.getProperty("os.name").startsWith("Windows"))
+			return "\\";
+		else
+			return "/";
+	}
 }

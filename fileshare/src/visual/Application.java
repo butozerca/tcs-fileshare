@@ -103,8 +103,6 @@ public class Application extends JFrame {
 			
 		});
 		
-		JTextPane textPane = new JTextPane();
-		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setToolTipText("Enter a file to search in your network");
 		
@@ -140,10 +138,7 @@ public class Application extends JFrame {
 								.addComponent(changelocalpathbtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(setusernamebtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnSearch)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnSearch)
 						.addComponent(btnJoinNetwork))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
@@ -164,9 +159,7 @@ public class Application extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewButton)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(textPane, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnSearch))
+					.addComponent(btnSearch)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnJoinNetwork)
 					.addContainerGap(100, Short.MAX_VALUE))
