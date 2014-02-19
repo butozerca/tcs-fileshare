@@ -20,31 +20,33 @@ public class SSLUtils {
 			"SSL_RSA_WITH_RC4_128_MD5", "SSL_RSA_WITH_RC4_128_SHA",
 			"SSL_RSA_WITH_3DES_EDE_CBC_SHA"};
 	
-	public static SSLContext getSSLContext(char[] keyStorePass) throws Exception {
+	public static SSLContext getSSLContext(String keyStorePath, char[] keyStorePass) throws Exception {
 		SSLContext context = SSLContext.getInstance("SSL");
 		
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 		
 		KeyStore ks = KeyStore.getInstance("JKS");
+		if(keyStorePath == null)
+			keyStorePath = "keystore.jks";
 		if(keyStorePass == null)
 			keyStorePass = "changeit".toCharArray();
-		ks.load(new FileInputStream("keystore.jks"), keyStorePass);
+		ks.load(new FileInputStream(keyStorePath), keyStorePass);
 		
 		kmf.init(ks, keyStorePass);
 		context.init(kmf.getKeyManagers(), null, null);
 		return context;
 	}
 	
-	public static SSLSocket getClientSocket(String host, int port, char[] keyStorePass) throws Exception {
-		SSLContext context = SSLUtils.getSSLContext(keyStorePass);
+	public static SSLSocket getClientSocket(String host, int port, String keyStorePath, char[] keyStorePass) throws Exception {
+		SSLContext context = SSLUtils.getSSLContext(keyStorePath, keyStorePass);
 		SSLSocketFactory factory = context.getSocketFactory();
 		SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
 		socket.setEnabledCipherSuites(strongSuites);
 		return socket;
 	}
 	
-	public static SSLServerSocket getServerSocket(int port, char[] keyStorePass) throws Exception {
-		SSLContext context = SSLUtils.getSSLContext(keyStorePass);
+	public static SSLServerSocket getServerSocket(int port, String keyStorePath, char[] keyStorePass) throws Exception {
+		SSLContext context = SSLUtils.getSSLContext(keyStorePath, keyStorePass);
 		SSLServerSocketFactory factory = context.getServerSocketFactory();
 		SSLServerSocket server = (SSLServerSocket) factory.createServerSocket(12345);
 		server.setEnabledCipherSuites(strongSuites);
