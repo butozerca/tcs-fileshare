@@ -7,18 +7,18 @@ package network;
  */
 
 public class FileSearchQuery {
-	private ServerAdress sender;
+	private ServerAddress sender;
 	private String filename;
 	private int ttl;
 	
 	/**
 	 * Constructor. 
-	 * @param sender Adress of the sender
+	 * @param sender Address of the sender
 	 * @param filename Part of the name of a file
 	 * @param ttl How deep do you want this query to go in the network
 	 */
 	
-	public FileSearchQuery(ServerAdress sender, String filename, int ttl) {
+	public FileSearchQuery(ServerAddress sender, String filename, int ttl) {
 		this.sender = sender;
 		this.filename = filename;
 		this.ttl = ttl;
@@ -32,7 +32,7 @@ public class FileSearchQuery {
 	public FileSearchQuery(String query) {
 		System.out.println(query);
 		String[] q = query.split(":");
-		this.sender = new ServerAdress(q[0], Integer.parseInt(q[1]), Integer.parseInt(q[2]), Integer.parseInt(q[3]));
+		this.sender = new ServerAddress(q[0], Integer.parseInt(q[1]), Integer.parseInt(q[2]), Integer.parseInt(q[3]));
 		this.filename = q[4];
 		this.ttl = Integer.parseInt(q[5]);
 	}
@@ -40,7 +40,7 @@ public class FileSearchQuery {
 	 * Returns the sender.
 	 * @return
 	 */
-	public ServerAdress getSender() {
+	public ServerAddress getSender() {
 		return sender;
 	}
 	/**
@@ -64,7 +64,7 @@ public class FileSearchQuery {
 	 */
 	
 	public String toString() {
-		return sender.adress + ":"
+		return sender.address + ":"
 				+ sender.destPortSearch + ":"
 				+ sender.destPortFile + ":"
 				+ sender.destPortAdd + ":"

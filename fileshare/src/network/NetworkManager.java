@@ -17,8 +17,8 @@ public class NetworkManager implements Serializable {
 	
 	private static final long serialVersionUID = 1220500879358120053L;
 	
-	private ServerAdress myAdress = new ServerAdress("0.0.0.0", 20000, 21000, 22000);
-	private AdressBlock neighbours = new AdressBlock();
+	private ServerAddress myAdress = new ServerAddress("0.0.0.0", 20000, 21000, 22000);
+	private AddressBlock neighbours = new AddressBlock();
 	private User user;
 	/**
 	 * Creates a manager for the selected user.
@@ -56,28 +56,28 @@ public class NetworkManager implements Serializable {
 	 * Allows to change adress of the user.
 	 * @param sa
 	 */
-	public void setAdress(ServerAdress sa){
+	public void setAdress(ServerAddress sa){
 		this.myAdress = sa;
 	}
 	/**
 	 * Returns this manager's adress.
 	 * @return
 	 */
-	public ServerAdress getAdress(){
+	public ServerAddress getAdress(){
 		return myAdress;
 	}
 	/**
 	 * Returns this manager's neighbour list.
 	 * @return
 	 */
-	public AdressBlock getNeighbours() {
+	public AddressBlock getNeighbours() {
 		return neighbours;
 	}
 	/**
 	 * Allows to change neighbour list of the user.
 	 * @param ab
 	 */
-	public void setNeighbours(AdressBlock ab){
+	public void setNeighbours(AddressBlock ab){
 		this.neighbours = ab;
 	}
 	

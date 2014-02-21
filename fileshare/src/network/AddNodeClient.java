@@ -47,7 +47,7 @@ public class AddNodeClient {
 			
 			String line = in.readLine();
 			System.out.println(line);
-			user.getManager().getNeighbours().add(new ServerAdress(line));
+			user.getManager().getNeighbours().add(new ServerAddress(line));
 			
 			client.close();
 		} catch (Exception e) {

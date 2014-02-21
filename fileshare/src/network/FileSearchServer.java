@@ -9,14 +9,14 @@ import java.net.ServerSocket;
  */
 public class FileSearchServer extends Thread {
 	private ServerSocket serverSocket;
-	private AdressBlock neighbours;
+	private AddressBlock neighbours;
 	/**
 	 * Constructor.
 	 * @param port
 	 * @param neighbours
 	 * @throws IOException
 	 */
-	public FileSearchServer(int port, AdressBlock neighbours) throws IOException {
+	public FileSearchServer(int port, AddressBlock neighbours) throws IOException {
 		this.serverSocket = new ServerSocket(port);
 		this.neighbours = neighbours;
 	}

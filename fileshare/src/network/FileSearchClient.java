@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 public class FileSearchClient {
 
-	private AdressBlock neighbours;
+	private AddressBlock neighbours;
 	private FileSearchQuery query;
 	/**
 	 * Creates the client.
 	 * @param neighbours
 	 * @param query
 	 */
-	public FileSearchClient(AdressBlock neighbours, FileSearchQuery query) {
+	public FileSearchClient(AddressBlock neighbours, FileSearchQuery query) {
 		this.neighbours = neighbours;
 		this.query = query;
 	}
@@ -29,9 +29,9 @@ public class FileSearchClient {
 	 */
 	public String getReply() {
 		StringBuilder reply = new StringBuilder();
-		for(ServerAdress dest : neighbours) {
+		for(ServerAddress dest : neighbours) {
 			try {
-				Socket client = new Socket(dest.adress, dest.destPortSearch);
+				Socket client = new Socket(dest.address, dest.destPortSearch);
 				
 				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 				out.println(query.toString());
@@ -67,23 +67,23 @@ public class FileSearchClient {
 	}
 
 	public static void main(String[] args) throws IOException {
-		AdressBlock n0 = new AdressBlock();
-		n0.add(new ServerAdress("0.0.0.0", 23300, 0, 1));
-		n0.add(new ServerAdress("0.0.0.0", 25301, 0, 1));
-		n0.add(new ServerAdress("0.0.0.0", 25302, 0, 1));
-		AdressBlock n1 = new AdressBlock();
-		n1.add(new ServerAdress("0.0.0.0", 25300, 0, 1));
-		AdressBlock n2 = new AdressBlock();
-		n2.add(new ServerAdress("0.0.0.0", 25300, 0, 1));
-		n2.add(new ServerAdress("0.0.0.0", 25303, 0, 1));
-		n2.add(new ServerAdress("0.0.0.0", 25304, 0, 1));
-		AdressBlock n3 = new AdressBlock();
-		n3.add(new ServerAdress("0.0.0.0", 25302, 0, 1));
-		n3.add(new ServerAdress("0.0.0.0", 25305, 0, 1));
-		AdressBlock n4 = new AdressBlock();
-		n4.add(new ServerAdress("0.0.0.0", 25302, 0, 1));
-		AdressBlock n5 = new AdressBlock();
-		n5.add(new ServerAdress("0.0.0.0", 25303, 0, 1));
+		AddressBlock n0 = new AddressBlock();
+		n0.add(new ServerAddress("0.0.0.0", 23300, 0, 1));
+		n0.add(new ServerAddress("0.0.0.0", 25301, 0, 1));
+		n0.add(new ServerAddress("0.0.0.0", 25302, 0, 1));
+		AddressBlock n1 = new AddressBlock();
+		n1.add(new ServerAddress("0.0.0.0", 25300, 0, 1));
+		AddressBlock n2 = new AddressBlock();
+		n2.add(new ServerAddress("0.0.0.0", 25300, 0, 1));
+		n2.add(new ServerAddress("0.0.0.0", 25303, 0, 1));
+		n2.add(new ServerAddress("0.0.0.0", 25304, 0, 1));
+		AddressBlock n3 = new AddressBlock();
+		n3.add(new ServerAddress("0.0.0.0", 25302, 0, 1));
+		n3.add(new ServerAddress("0.0.0.0", 25305, 0, 1));
+		AddressBlock n4 = new AddressBlock();
+		n4.add(new ServerAddress("0.0.0.0", 25302, 0, 1));
+		AddressBlock n5 = new AddressBlock();
+		n5.add(new ServerAddress("0.0.0.0", 25303, 0, 1));
 		FileSearchServer[] servers = {
 			new FileSearchServer(25300, n0),
 			new FileSearchServer(25301, n1),
@@ -97,8 +97,8 @@ public class FileSearchClient {
 			s.start();
 		}
 		FileSearchQuery que = new FileSearchQuery("0.0.0.0:23300:0:1:File:2");
-		AdressBlock hosts = new AdressBlock();
-		hosts.add(new ServerAdress("0.0.0.0", 25300, 0, 1));
+		AddressBlock hosts = new AddressBlock();
+		hosts.add(new ServerAddress("0.0.0.0", 25300, 0, 1));
 		FileSearchClient cl = new FileSearchClient(hosts, que);
 		ArrayList<String> strings = cl.getContent();
 		for(String s : strings) {

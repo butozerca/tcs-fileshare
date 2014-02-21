@@ -23,7 +23,7 @@ public class AddNodeServerThread extends Thread {
 					new InputStreamReader(socket.getInputStream()));
 			String line = in.readLine();
 			System.out.println(line);
-			user.getManager().getNeighbours().add(new ServerAdress(line));
+			user.getManager().getNeighbours().add(new ServerAddress(line));
 			
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			out.println(user.getManager().getAdress());

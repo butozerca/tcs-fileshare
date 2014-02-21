@@ -15,9 +15,9 @@ import common.SearchFile;
  */
 public class FileSearchServerThread extends Thread {
 	private Socket socket;
-	private AdressBlock neighbours;
+	private AddressBlock neighbours;
 
-	public FileSearchServerThread(Socket socket, AdressBlock neighbours) throws IOException {
+	public FileSearchServerThread(Socket socket, AddressBlock neighbours) throws IOException {
 		this.socket = socket;
 		this.neighbours = neighbours;
 	}
@@ -37,9 +37,9 @@ public class FileSearchServerThread extends Thread {
 				out.println(socket.getInetAddress().getHostAddress() + ":" + file.substring(file.indexOf(Fileshare.getSharedPath())));
 			}
 			if(query.getTtl() > 0) {
-				AdressBlock dests = new AdressBlock(neighbours);
+				AddressBlock dests = new AddressBlock(neighbours);
 				dests.remove(query.getSender());
-				ServerAdress newSender = new ServerAdress(socket.getInetAddress().getHostAddress(), socket.getLocalPort(), 0, 1);
+				ServerAddress newSender = new ServerAddress(socket.getInetAddress().getHostAddress(), socket.getLocalPort(), 0, 1);
 				FileSearchQuery newQuery = new FileSearchQuery(newSender, query.getFilename(), query.getTtl()-1);
 				FileSearchClient cl = new FileSearchClient(dests, newQuery);
 				out.print(cl.getReply());

@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import network.ServerAdress;
+import network.ServerAddress;
 
 /**
  * A frame which allows user to connect to a network using an adress of a known other host.
@@ -83,7 +83,7 @@ public class JoinNetworkBox extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(verifyAdress(adressField.getText(), portFieldSearch.getText(), portFieldFile.getText())){
-					new ServerAdress(adressField.getText(), 
+					new ServerAddress(adressField.getText(), 
 							Integer.parseInt(portFieldSearch.getText()),
 							Integer.parseInt(portFieldFile.getText()),
 							Integer.parseInt(portFieldAdd.getText()));
@@ -106,8 +106,8 @@ public class JoinNetworkBox extends JFrame {
 	}
 	
 	@SuppressWarnings("unused")
-	private ServerAdress convert(String adresip, String portsearch, String portfile, String portadd){
-		return new ServerAdress(adresip, Integer.getInteger(portsearch), Integer.getInteger(portfile), Integer.getInteger(portadd));
+	private ServerAddress convert(String adresip, String portsearch, String portfile, String portadd){
+		return new ServerAddress(adresip, Integer.getInteger(portsearch), Integer.getInteger(portfile), Integer.getInteger(portadd));
 	}
 	/**
 	 * Returns the current instance of this frame. New one if none exists.
