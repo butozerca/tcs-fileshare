@@ -5,8 +5,8 @@ import java.net.ServerSocket;
 
 import model.User;
 /**
- * Class provides the server part of exchanging an adress. Every user is associated with one of these.
- * It awaits connection and agrees to exchange of adresses between the initiator and user.
+ * Class provides the server part of exchanging an address. Every user is associated with one of these.
+ * It awaits connection and agrees to exchange of addresses between the initiator and user.
  * @author michal2
  *
  */
@@ -19,7 +19,7 @@ public class AddNodeServer extends Thread {
 	 */
 	public AddNodeServer(User user) throws IOException {
 		this.user = user;
-		this.serverSocket = new ServerSocket(this.user.getManager().getAdress().destPortAdd);
+		this.serverSocket = new ServerSocket(this.user.getManager().getAdress().getDestPortAdd());
 	}
 	/**
 	 * Starts the server.

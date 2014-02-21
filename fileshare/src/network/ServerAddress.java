@@ -10,10 +10,10 @@ import java.io.Serializable;
 public class ServerAddress implements Serializable {
 	
 	private static final long serialVersionUID = -7204732772252817997L;
-	public String address;
-	public int destPortSearch;
-	public int destPortFile;
-	public int destPortAdd;
+	private String address;
+	private int destPortSearch;
+	private int destPortFile;
+	private int destPortAdd;
 	
 	/**
 	 * Constructor. 
@@ -40,6 +40,34 @@ public class ServerAddress implements Serializable {
 		this.destPortAdd = Integer.parseInt(ad[3]);
 	}
 
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+	
+	/**
+	 * @return the destPortSearch
+	 */
+	public int getDestPortSearch() {
+		return destPortSearch;
+	}
+	
+	/**
+	 * @return the destPortFile
+	 */
+	public int getDestPortFile() {
+		return destPortFile;
+	}
+	
+	/**
+	 * @return the destPortAdd
+	 */
+	public int getDestPortAdd() {
+		return destPortAdd;
+	}
+	
 	/**
 	 * Calculates hash code of this instance.
 	 */

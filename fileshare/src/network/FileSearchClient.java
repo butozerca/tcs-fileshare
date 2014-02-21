@@ -31,7 +31,7 @@ public class FileSearchClient {
 		StringBuilder reply = new StringBuilder();
 		for(ServerAddress dest : neighbours) {
 			try {
-				Socket client = new Socket(dest.address, dest.destPortSearch);
+				Socket client = new Socket(dest.getAddress(), dest.getDestPortSearch());
 				
 				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 				out.println(query.toString());

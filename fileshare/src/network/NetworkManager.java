@@ -31,14 +31,14 @@ public class NetworkManager implements Serializable {
 	 */
 	public void startServers(){
 		try {
-			FileSearchServer FSS = new FileSearchServer(myAdress.destPortSearch, neighbours);
+			FileSearchServer FSS = new FileSearchServer(myAdress.getDestPortSearch(), neighbours);
 			FSS.setDaemon(true);
 			FSS.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
-			FileTransferServer FTS = new FileTransferServer(myAdress.destPortFile);
+			FileTransferServer FTS = new FileTransferServer(myAdress.getDestPortFile());
 			FTS.setDaemon(true);
 			FTS.start();
 		} catch (IOException e) {
