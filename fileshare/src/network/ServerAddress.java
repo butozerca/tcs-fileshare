@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class ServerAddress implements Serializable {
 	
 	private static final long serialVersionUID = -7204732772252817997L;
-	private String address;
+	private String IP;
 	private int destPortSearch;
 	private int destPortFile;
 	private int destPortAdd;
@@ -23,7 +23,7 @@ public class ServerAddress implements Serializable {
 	 * @param destPortAdd AddNodeServer port
 	 */
 	public ServerAddress(String address, int destPortSearch, int destPortFile, int destPortAdd) {
-		this.address = address;
+		this.IP = address;
 		this.destPortSearch = destPortSearch;
 		this.destPortFile = destPortFile;
 		this.destPortAdd = destPortAdd;
@@ -34,7 +34,7 @@ public class ServerAddress implements Serializable {
 	 */
 	public ServerAddress(String line) {
 		String[] ad = line.split(":");
-		this.address = ad[0];
+		this.IP = ad[0];
 		this.destPortSearch = Integer.parseInt(ad[1]);
 		this.destPortFile = Integer.parseInt(ad[2]);
 		this.destPortAdd = Integer.parseInt(ad[3]);
@@ -43,8 +43,8 @@ public class ServerAddress implements Serializable {
 	/**
 	 * @return the address
 	 */
-	public String getAddress() {
-		return address;
+	public String getIP() {
+		return IP;
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class ServerAddress implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((IP == null) ? 0 : IP.hashCode());
 		result = prime * result + destPortAdd;
 		result = prime * result + destPortFile;
 		result = prime * result + destPortSearch;
@@ -94,10 +94,10 @@ public class ServerAddress implements Serializable {
 		if (!(obj instanceof ServerAddress))
 			return false;
 		ServerAddress other = (ServerAddress) obj;
-		if (address == null) {
-			if (other.address != null)
+		if (IP == null) {
+			if (other.IP != null)
 				return false;
-		} else if (!address.equals(other.address))
+		} else if (!IP.equals(other.IP))
 			return false;
 		if (destPortAdd != other.destPortAdd)
 			return false;
@@ -112,7 +112,7 @@ public class ServerAddress implements Serializable {
 	 * Parses this class into a string.
 	 */
 	public String toString() {
-		return address + ":" 
+		return IP + ":" 
 				+ destPortSearch + ":"
 				+ destPortFile + ":"
 				+ destPortAdd;

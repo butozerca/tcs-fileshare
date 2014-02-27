@@ -37,7 +37,7 @@ public class NetworkManager implements Serializable {
 		childBlock = new AddressBlock[Constants.child_count];
 		childBlock = children;
 	}
-	public ServerAddress getMyAdress() {
+	public ServerAddress getMyAddress() {
 		return myAddress;
 	}
 	public AddressBlock getParentBlock() {
@@ -92,15 +92,8 @@ public class NetworkManager implements Serializable {
 	 * Allows to change adress of the user.
 	 * @param sa
 	 */
-	public void setAdress(ServerAddress sa){
+	public void setAddress(ServerAddress sa){
 		this.myAddress = sa;
-	}
-	/**
-	 * Returns this manager's adress.
-	 * @return
-	 */
-	public ServerAddress getAdress(){
-		return myAddress;
 	}
 	
 	public static void main(String args[]){
