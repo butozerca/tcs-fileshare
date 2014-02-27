@@ -48,6 +48,7 @@ public class AddNodeClient {
 			String line = in.readLine();
 			System.out.println(line);
 			user.getManager().getNeighbours().add(new ServerAddress(line));
+			// TODO: asdf
 			
 			client.close();
 		} catch (Exception e) {

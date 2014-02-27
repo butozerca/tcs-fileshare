@@ -64,10 +64,10 @@ public class FileSearchQuery {
 	 */
 	
 	public String toString() {
-		return sender.address + ":"
-				+ sender.destPortSearch + ":"
-				+ sender.destPortFile + ":"
-				+ sender.destPortAdd + ":"
+		return sender.getAddress() + ":"
+				+ sender.getDestPortSearch() + ":"
+				+ sender.getDestPortFile() + ":"
+				+ sender.getDestPortAdd() + ":"
 				+ filename + ":"
 				+ ttl;
 	}

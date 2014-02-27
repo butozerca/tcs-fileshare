@@ -24,6 +24,7 @@ public class AddNodeServerThread extends Thread {
 			String line = in.readLine();
 			System.out.println(line);
 			user.getManager().getNeighbours().add(new ServerAddress(line));
+			// TODO: asdf
 			
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			out.println(user.getManager().getAdress());

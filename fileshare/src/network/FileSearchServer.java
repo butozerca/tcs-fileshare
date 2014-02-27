@@ -9,16 +9,16 @@ import java.net.ServerSocket;
  */
 public class FileSearchServer extends Thread {
 	private ServerSocket serverSocket;
-	private AddressBlock neighbours;
+	private NetworkManager manager;
 	/**
 	 * Constructor.
 	 * @param port
 	 * @param neighbours
 	 * @throws IOException
 	 */
-	public FileSearchServer(int port, AddressBlock neighbours) throws IOException {
+	public FileSearchServer(int port, NetworkManager manager) throws IOException {
 		this.serverSocket = new ServerSocket(port);
-		this.neighbours = neighbours;
+		this.manager = manager;
 	}
 	/**
 	 * Starts the server.
@@ -26,7 +26,7 @@ public class FileSearchServer extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				new FileSearchServerThread(serverSocket.accept(), neighbours).start();
+				new FileSearchServerThread(serverSocket.accept(), manager).start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

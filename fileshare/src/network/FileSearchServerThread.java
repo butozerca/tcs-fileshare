@@ -15,11 +15,11 @@ import common.SearchFile;
  */
 public class FileSearchServerThread extends Thread {
 	private Socket socket;
-	private AddressBlock neighbours;
+	private NetworkManager manager;
 
-	public FileSearchServerThread(Socket socket, AddressBlock neighbours) throws IOException {
+	public FileSearchServerThread(Socket socket, NetworkManager manager) throws IOException {
 		this.socket = socket;
-		this.neighbours = neighbours;
+		this.manager = manager;
 	}
 	
 	public void run() {
