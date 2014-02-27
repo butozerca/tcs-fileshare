@@ -12,41 +12,38 @@ import java.util.ArrayList;
 
 public class FileSearchClient {
 
-	private AddressBlock neighbours;
+	private NetworkManager manager;
 	private FileSearchQuery query;
+	private int forbiddenDest;
 	/**
 	 * Creates the client.
 	 * @param neighbours
 	 * @param query
 	 */
-	public FileSearchClient(AddressBlock neighbours, FileSearchQuery query) {
-		this.neighbours = neighbours;
+	public FileSearchClient(NetworkManager manager, FileSearchQuery query, int forbiddenDest) {
+		this.manager = manager;
 		this.query = query;
+		this.forbiddenDest = forbiddenDest;
 	}
 	/**
 	 * Starts connection and waits for a response from the server.
 	 * @return String describing links to files which match the query.
 	 */
 	public String getReply() {
+		if(query.getTtl() < 1)
+			return "";
 		StringBuilder reply = new StringBuilder();
-		for(ServerAddress dest : neighbours) {
-			try {
-				Socket client = new Socket(dest.getAddress(), dest.getDestPortSearch());
-				
-				PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-				out.println(query.toString());
-				
-				BufferedReader in = new BufferedReader(
-						new InputStreamReader(client.getInputStream()));
-				String line;
-				while((line = in.readLine()) != null)
-					reply.append(line + "\n");
-				client.close();
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		for(ServerAddress addr : manager.getMyBlock()) {
+			if(addr.equals(manager.getMyAddress()))
+				continue;
+			FileSearchQuery instantQuery = new FileSearchQuery(query.getId(), query.getFilename(), 0);
+			askAddress(addr.getIP(), addr.getDestPortSearch(), instantQuery, reply);
+		}
+		for(AddressBlock mesh : manager.getNeighbours()) {
+			if(mesh == null || mesh.getId() == forbiddenDest)
+				continue;
+			ServerAddress addr = mesh.getRandom();
+			askAddress(addr.getIP(), addr.getDestPortSearch(), query, reply);
 		}
 		return reply.toString();
 	}
@@ -65,9 +62,29 @@ public class FileSearchClient {
 		} 
 		return res;
 	}
+	
+	private void askAddress(String address, int port, FileSearchQuery query, StringBuilder reply) {
+		try {
+			Socket client = new Socket(address, port);
+			
+			PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+			out.println(query.toString());
+			
+			BufferedReader in = new BufferedReader(
+					new InputStreamReader(client.getInputStream()));
+			String line;
+			while((line = in.readLine()) != null)
+				reply.append(line + "\n");
+			client.close();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) throws IOException {
-		AddressBlock n0 = new AddressBlock();
+		/*AddressBlock n0 = new AddressBlock();
 		n0.add(new ServerAddress("0.0.0.0", 23300, 0, 1));
 		n0.add(new ServerAddress("0.0.0.0", 25301, 0, 1));
 		n0.add(new ServerAddress("0.0.0.0", 25302, 0, 1));
@@ -103,6 +120,6 @@ public class FileSearchClient {
 		ArrayList<String> strings = cl.getContent();
 		for(String s : strings) {
 			System.out.println(s);
-		}
+		}*/
 	}
 }

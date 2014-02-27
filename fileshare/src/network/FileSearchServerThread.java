@@ -28,20 +28,18 @@ public class FileSearchServerThread extends Thread {
 					new InputStreamReader(socket.getInputStream()));
 			String line = in.readLine();
 			FileSearchQuery query = new FileSearchQuery(line);
-			System.out.println("Server " + socket.getLocalPort() + " received query: " + query);
+			//System.out.println("Server " + socket.getLocalPort() + " received query: " + query);
 			
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			
 			ArrayList<String> files = SearchFile.searchFile(query.getFilename(), Fileshare.getSharedPath());
 			for(String file : files) {
-				out.println(socket.getInetAddress().getHostAddress() + ":" + file.substring(file.indexOf(Fileshare.getSharedPath())));
+				out.println(manager.getMyAddress().getIP() + ":" + manager.getMyAddress().getDestPortFile() +
+						":" + file.substring(file.indexOf(Fileshare.getSharedPath())));
 			}
 			if(query.getTtl() > 0) {
-				AddressBlock dests = new AddressBlock(neighbours);
-				dests.remove(query.getSender());
-				ServerAddress newSender = new ServerAddress(socket.getInetAddress().getHostAddress(), socket.getLocalPort(), 0, 1);
-				FileSearchQuery newQuery = new FileSearchQuery(newSender, query.getFilename(), query.getTtl()-1);
-				FileSearchClient cl = new FileSearchClient(dests, newQuery);
+				FileSearchQuery newQuery = new FileSearchQuery(manager.getMyBlock().getId(), query.getFilename(), query.getTtl()-1);
+				FileSearchClient cl = new FileSearchClient(manager, newQuery, query.getId());
 				out.print(cl.getReply());
 			}
 			out.flush();

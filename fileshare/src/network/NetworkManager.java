@@ -21,6 +21,7 @@ public class NetworkManager implements Serializable {
 	
 	private ServerAddress myAddress = new ServerAddress("0.0.0.0", 20000, 21000, 22000);
 	private AddressBlock parentBlock, myBlock;
+
 	private AddressBlock[] childBlock;
 	private User user;
 	/**
@@ -39,6 +40,9 @@ public class NetworkManager implements Serializable {
 	}
 	public ServerAddress getMyAddress() {
 		return myAddress;
+	}
+	public void setMyAddress(ServerAddress myAddress) {
+		this.myAddress = myAddress;
 	}
 	public AddressBlock getParentBlock() {
 		return parentBlock;
@@ -87,13 +91,6 @@ public class NetworkManager implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	/**
-	 * Allows to change adress of the user.
-	 * @param sa
-	 */
-	public void setAddress(ServerAddress sa){
-		this.myAddress = sa;
 	}
 	
 	public static void main(String args[]){

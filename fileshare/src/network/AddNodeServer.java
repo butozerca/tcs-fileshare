@@ -19,7 +19,7 @@ public class AddNodeServer extends Thread {
 	 */
 	public AddNodeServer(User user) throws IOException {
 		this.user = user;
-		this.serverSocket = new ServerSocket(this.user.getManager().getAdress().getDestPortAdd());
+		this.serverSocket = new ServerSocket(this.user.getManager().getMyAddress().getDestPortAdd());
 	}
 	/**
 	 * Starts the server.
