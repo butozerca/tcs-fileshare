@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import common.Constants;
+
 import network.FileSearchClient;
 import network.FileSearchQuery;
 import network.NetworkManager;
@@ -65,8 +67,9 @@ public class SearchFileBox extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String filename = textField.getText();
 				NetworkManager sender = Fileshare.getInstance().getUser().getManager();
-				FileSearchQuery query = new FileSearchQuery(sender.getAdress(), filename, 3);
-				FileSearchClient cl = new FileSearchClient(sender.getNeighbours(), query);
+				FileSearchQuery query = new FileSearchQuery(sender.getMyBlock().getId(),
+						filename, Constants.query_ttl);
+				FileSearchClient cl = new FileSearchClient(sender, query, 0);
 				System.out.println(query);
 				System.out.println(cl.getContent());
 				FilePickerWindow.getInstance(cl.getContent()).setVisible(true);

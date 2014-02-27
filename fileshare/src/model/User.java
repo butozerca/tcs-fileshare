@@ -23,7 +23,7 @@ public class User implements Serializable {
 	public User(){
 		username = "No username";
 		localPath = "fileshare" + getSystemSlash() + "shared" + getSystemSlash();
-		networkManager = new NetworkManager(this, null, null, null, null);
+		networkManager = new NetworkManager(this, null, null, null);
 	}
 	/**
 	 *  Sets the NetworkManager associated with this user.
