@@ -1,74 +1,70 @@
 package network;
 
 /**
- * Class describing a query in searching for a file.
- * @author michal2
- *
+ * Class describing a query used in searching for a file protocol. The query stores two values:
+ * filename, which is a partial name of a file to be searched for and ttl, which indicates how deep 
+ * this query is forwarded into the network.
+ * @author patryk
  */
 
 public class FileSearchQuery {
-	private ServerAddress sender;
+
+	private int id;
 	private String filename;
 	private int ttl;
 	
 	/**
-	 * Constructor. 
-	 * @param sender Address of the sender
-	 * @param filename Part of the name of a file
-	 * @param ttl How deep do you want this query to go in the network
+	 * Constructs a query with given filename and ttl.
+	 * @param filename Part of the name of a file to be searched for.
+	 * @param ttl How deep you want this query to go into the network
 	 */
 	
-	public FileSearchQuery(ServerAddress sender, String filename, int ttl) {
-		this.sender = sender;
+	public FileSearchQuery(int id, String filename, int ttl) {
+		this.id = id;
 		this.filename = filename;
 		this.ttl = ttl;
 	}
 	
 	/**
 	 * Constructor opposite to a toString method.
-	 * @param query
+	 * @param query Query given as one String with filename and ttl separated with a colon.
 	 */
-	
 	public FileSearchQuery(String query) {
-		System.out.println(query);
 		String[] q = query.split(":");
-		this.sender = new ServerAddress(q[0], Integer.parseInt(q[1]), Integer.parseInt(q[2]), Integer.parseInt(q[3]));
-		this.filename = q[4];
-		this.ttl = Integer.parseInt(q[5]);
+		this.id = Integer.parseInt(q[0]);
+		this.filename = q[1];
+		this.ttl = Integer.parseInt(q[2]);
 	}
-	/**
-	 * Returns the sender.
-	 * @return
-	 */
-	public ServerAddress getSender() {
-		return sender;
-	}
+
 	/**
 	 * Returns the name of a file which is queried.
-	 * @return
+	 * @return the name of a file which is queried.
 	 */
 	public String getFilename() {
 		return filename;
 	}
 	
 	/**
-	 * Returns queries time to live.
-	 * @return
+	 * Returns time to live of this query.
+	 * @return time to live of this query.
 	 */
 	public int getTtl() {
 		return ttl;
 	}
 	
 	/**
-	 * Translates this query to a String.
+	 * Returns id of the client's AddressBlock.
+	 * @return id of the client's AddressBlock.
 	 */
+	public int getId() {
+		return id;
+	}
 	
+	/**
+	 * Translates this query to a String.
+	 * @return String representation of this query.
+	 */
 	public String toString() {
-		return sender.getAddress() + ":"
-				+ sender.getDestPortSearch() + ":"
-				+ sender.getDestPortFile() + ":"
-				+ sender.getDestPortAdd() + ":"
-				+ filename + ":"
-				+ ttl;
+		return id + ":" + filename + ":" + ttl;
 	}
 }
