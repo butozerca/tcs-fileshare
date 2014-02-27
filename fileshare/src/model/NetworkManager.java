@@ -88,7 +88,7 @@ public class NetworkManager implements Serializable {
 			e.printStackTrace();
 		}
 		try {
-			AddNodeServer ANS = new AddNodeServer(user);
+			AddNodeServer ANS = new AddNodeServer(this);
 			ANS.setDaemon(true);
 			ANS.start();
 		} catch (IOException e) {

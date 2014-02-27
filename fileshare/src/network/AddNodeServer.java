@@ -1,8 +1,10 @@
 package network;
 
 import java.io.IOException;
+import java.net.NetworkInterface;
 import java.net.ServerSocket;
 
+import model.NetworkManager;
 import model.User;
 /**
  * Class provides the server part of exchanging an address. Every user is associated with one of these.
@@ -13,13 +15,13 @@ import model.User;
 public class AddNodeServer extends Thread {
 	
 	private ServerSocket serverSocket;
-	private User user;
+	private NetworkManager manager;
 	/**
 	 * 
 	 */
-	public AddNodeServer(User user) throws IOException {
-		this.user = user;
-		this.serverSocket = new ServerSocket(this.user.getManager().getMyAddress().getDestPortAdd());
+	public AddNodeServer(NetworkManager manager) throws IOException {
+		this.manager = manager;
+		this.serverSocket = new ServerSocket(this.manager.getMyAddress().getDestPortAdd());
 	}
 	/**
 	 * Starts the server.
@@ -27,7 +29,7 @@ public class AddNodeServer extends Thread {
 	public void run() {
 		while (true) {
 			 try {
-				new AddNodeServerThread(serverSocket.accept(), user).start();
+				new AddNodeServerThread(serverSocket.accept(), manager).start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

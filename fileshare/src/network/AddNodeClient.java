@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.Socket;
 
+import queries.PhaseQuery;
+
 import model.ServerAddress;
 import model.User;
 
@@ -18,9 +20,9 @@ import model.User;
 
 public class AddNodeClient {
 	
-	private String destAddress;
-	private int destPort;
-	private User user;
+	private PhaseQuery query;
+	private String IP;
+	private int port;
 	/**
 	 * Creates a client for this particular connection.
 	 * @param destAddress Destination adress.
@@ -28,32 +30,33 @@ public class AddNodeClient {
 	 * @param user User sending the message.
 	 * @throws MalformedURLException
 	 */
-	public AddNodeClient(String destAddress, int destPort, User user) throws MalformedURLException {
-		this.destAddress = destAddress;
-		this.destPort = destPort;
-		this.user = user;
+	public AddNodeClient(PhaseQuery pquery, String IP, int port){
+		this.query = pquery;
+		this.IP = IP;
+		this.port = port;
 	}
 	/**
 	 * Opens the connection between sender and destination.
 	 */
-	public void addNode() {
+	public String sendQuery() {
 		try {
-			Socket client = new Socket(destAddress, destPort);
+			
+			Socket client = new Socket(IP, port);
 			
 			PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-			out.println(user.getManager().getAdress().toString());
+			out.println(query.toString());
 			
 			BufferedReader in = new BufferedReader(
 				new InputStreamReader(client.getInputStream()));
 			
 			String line = in.readLine();
-			System.out.println(line);
-			user.getManager().getNeighbours().add(new ServerAddress(line));
-			// TODO: asdf
+			System.out.println("dostalem odpowiedz " + line);
 			
 			client.close();
+			return line;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 }

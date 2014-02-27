@@ -14,6 +14,11 @@ public class Phase0Query extends PhaseQuery {
 		this.address = address;
 	}
 	
+	public Phase0Query(String s){
+		String[] q = s.split(":");
+		this.address = new ServerAddress(q[1], Integer.parseInt(q[2]), Integer.parseInt(q[3]), Integer.parseInt(q[4]));
+	}
+	
 	public String toString(){
 		return "0:" + address.toString();
 	}
