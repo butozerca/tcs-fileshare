@@ -1,4 +1,10 @@
-package network;
+
+
+import network.FileSearchClient;
+import model.AddressBlock;
+import model.NetworkManager;
+import model.ServerAddress;
+import queries.FileSearchQuery;
 
 public class SampleStructure {
 	public static void main(String[] args) {

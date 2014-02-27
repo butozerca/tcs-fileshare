@@ -2,6 +2,8 @@ package network;
 
 import java.io.*;
 import java.net.ServerSocket;
+
+import model.NetworkManager;
 /**
  * Class provides server part of searching the network for a file protocol.
  * Aside from just responding to the client, it also relays the query further in the network.

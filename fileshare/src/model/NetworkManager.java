@@ -1,4 +1,4 @@
-package network;
+package model;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -7,9 +7,12 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
+import network.AddNodeServer;
+import network.FileSearchServer;
+import network.FileTransferServer;
+
 import common.Constants;
 
-import model.User;
 /**
  * Class consists of user's server's ports and his known neighbours in the network.
  * @author michal2

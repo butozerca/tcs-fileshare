@@ -1,7 +1,6 @@
 package model;
 import java.io.Serializable;
 
-import network.NetworkManager;
 
 /**
  * Class describing a user in this application.

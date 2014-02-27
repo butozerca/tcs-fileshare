@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import model.ServerAddress;
 import model.User;
 
 public class AddNodeServerThread extends Thread {

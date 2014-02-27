@@ -7,7 +7,10 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import queries.FileSearchQuery;
+
 import model.Fileshare;
+import model.NetworkManager;
 
 import common.SearchFile;
 /**

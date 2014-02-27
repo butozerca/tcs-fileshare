@@ -1,4 +1,4 @@
-package network;
+package queries;
 
 /**
  * Class describing a query used in searching for a file protocol. The query stores two values:

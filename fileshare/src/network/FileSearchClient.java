@@ -4,6 +4,12 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
+import model.AddressBlock;
+import model.NetworkManager;
+import model.ServerAddress;
+
+import queries.FileSearchQuery;
+
 /**
  * Class provides client part of searching the network for a file protocol.
  * Sender its neighbours if they have the needed file.

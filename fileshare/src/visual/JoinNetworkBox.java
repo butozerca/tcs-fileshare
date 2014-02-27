@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import network.ServerAddress;
+import model.ServerAddress;
 
 /**
  * A frame which allows user to connect to a network using an adress of a known other host.

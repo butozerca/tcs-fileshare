@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.Socket;
 
+import model.ServerAddress;
 import model.User;
 
 /**

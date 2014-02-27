@@ -12,12 +12,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import queries.FileSearchQuery;
+
 import common.Constants;
 
 import network.FileSearchClient;
-import network.FileSearchQuery;
-import network.NetworkManager;
 import model.Fileshare;
+import model.NetworkManager;
 
 /**
  * A frame which allows user to ask the network for a file.

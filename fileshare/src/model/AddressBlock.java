@@ -1,7 +1,8 @@
-package network;
+package model;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 /**
  * Macro for a list of addresses.
  * @author michal2
