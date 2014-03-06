@@ -11,8 +11,6 @@ import network.AddNodeServer;
 import network.FileSearchServer;
 import network.FileTransferServer;
 
-import common.Constants;
-
 /**
  * Class consists of user's server's ports and his known neighbours in the network.
  * @author michal2
@@ -38,7 +36,7 @@ public class NetworkManager implements Serializable {
 			myBlock = new AddressBlock(1);
 			myBlock.add(myAddress);
 		}
-		childBlock = new AddressBlock[Constants.child_count];
+		childBlock = new AddressBlock[2];
 		childBlock = children;
 	}
 	public ServerAddress getMyAddress() {
@@ -60,10 +58,14 @@ public class NetworkManager implements Serializable {
 		return user;
 	}
 	
+	public void setChildBlock(int i, AddressBlock ab){
+		childBlock[i] = ab;
+	}
+	
 	public AddressBlock[] getNeighbours(){
-		AddressBlock[] neigh = new AddressBlock[Constants.child_count + 1];
+		AddressBlock[] neigh = new AddressBlock[3];
 		neigh[0] = parentBlock;
-		for(int i = 0; i < Constants.child_count; ++i){
+		for(int i = 0; i < 2; ++i){
 			neigh[i+1] = childBlock[i];
 		}
 		return neigh;
@@ -113,6 +115,24 @@ public class NetworkManager implements Serializable {
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * @param parentBlock the parentBlock to set
+	 */
+	public void setParentBlock(AddressBlock parentBlock) {
+		this.parentBlock = parentBlock;
+	}
+	/**
+	 * @param myBlock the myBlock to set
+	 */
+	public void setMyBlock(AddressBlock myBlock) {
+		this.myBlock = myBlock;
+	}
+	/**
+	 * @param childBlock the childBlock to set
+	 */
+	public void setChildBlock(AddressBlock[] childBlock) {
+		this.childBlock = childBlock;
 	}
 	
 }

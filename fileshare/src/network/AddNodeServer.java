@@ -1,11 +1,9 @@
 package network;
 
 import java.io.IOException;
-import java.net.NetworkInterface;
 import java.net.ServerSocket;
 
 import model.NetworkManager;
-import model.User;
 /**
  * Class provides the server part of exchanging an address. Every user is associated with one of these.
  * It awaits connection and agrees to exchange of addresses between the initiator and user.

@@ -29,6 +29,6 @@ public class Phase4Query extends PhaseQuery {
 	}
 	
 	public String toString(){
-		return "4:" + destId + ":" + address.toString();
+		return "4;" + destId + ";" + address.toString();
 	}
 }

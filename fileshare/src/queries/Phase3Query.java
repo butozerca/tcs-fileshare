@@ -1,22 +1,33 @@
 package queries;
 
-import model.NetworkManager;
+import model.AddressBlock;
 
 public class Phase3Query extends PhaseQuery {
 
-	private NetworkManager manager;
+	private int id;
+	private AddressBlock[] blocks;
 	
-	public Phase3Query(NetworkManager manager) {
-		this.manager = manager;
+	public Phase3Query(int id, AddressBlock[] blocks) {
+		this.id = id;
+		this.blocks = blocks;
 	}
 	
-	public NetworkManager getManager(){
-		return manager;
+	public AddressBlock[] getBlocks(){
+		return blocks;
 	}
 	
 	public String toString(){
-		//TODO: manager w formie dla ludzi
-		return "";
+		StringBuilder str = new StringBuilder("3;");
+		str.append(id);
+		for(AddressBlock ab : blocks){
+			str.append(";");
+			if(ab == null) {
+				str.append("[]");
+				continue;
+			}
+			str.append(ab.toString());
+		}
+		return str.toString();
 	}
 
 }

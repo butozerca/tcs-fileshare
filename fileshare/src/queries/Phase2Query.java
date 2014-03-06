@@ -29,7 +29,7 @@ public class Phase2Query extends PhaseQuery {
 	}
 	
 	public String toString(){
-		return "2:" + destId + ":" + address.toString();
+		return "2;" + destId + ";" + address.toString();
 	}
 
 }
