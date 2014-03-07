@@ -49,6 +49,8 @@ public class FileSearchClient {
 			if(mesh == null || mesh.getId() == forbiddenDest)
 				continue;
 			ServerAddress addr = mesh.getRandom();
+			if(addr == null)
+				continue;
 			askAddress(addr.getIP(), addr.getDestPortSearch(), query, reply);
 		}
 		return reply.toString();

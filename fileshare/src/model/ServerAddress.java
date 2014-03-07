@@ -47,6 +47,10 @@ public class ServerAddress implements Serializable {
 		return IP;
 	}
 	
+	public void setIP(String IP) {
+		this.IP = IP;
+	}
+	
 	/**
 	 * @return the destPortSearch
 	 */

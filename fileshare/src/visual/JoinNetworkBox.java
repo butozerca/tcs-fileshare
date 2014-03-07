@@ -4,16 +4,18 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
+import model.Fileshare;
 import model.ServerAddress;
+import network.AddNodeClient;
+import queries.Phase0Query;
 
 /**
  * A frame which allows user to connect to a network using an adress of a known other host.
@@ -27,8 +29,6 @@ public class JoinNetworkBox extends JFrame {
 	private static JoinNetworkBox instance = null;
 	private JPanel contentPane;
 	private JTextField adressField;
-	private JTextField portFieldSearch;
-	private JTextField portFieldFile;
 	private JTextField portFieldAdd;
 
 
@@ -59,18 +59,6 @@ public class JoinNetworkBox extends JFrame {
 		panel.add(adressField);
 		adressField.setColumns(12);
 		
-		portFieldSearch = new JTextField();
-		portFieldSearch.setToolTipText("Enter hosts' search port");
-		portFieldSearch.setText("port share");
-		panel.add(portFieldSearch);
-		portFieldSearch.setColumns(7);
-		
-		portFieldFile = new JTextField();
-		portFieldFile.setToolTipText("Enter hosts' file port");
-		portFieldFile.setText("port file");
-		panel.add(portFieldFile);
-		portFieldFile.setColumns(7);
-		
 		portFieldAdd = new JTextField();
 		portFieldAdd.setToolTipText("Enter hosts' add port");
 		portFieldAdd.setText("port add");
@@ -82,11 +70,17 @@ public class JoinNetworkBox extends JFrame {
 		btnOK.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(verifyAdress(adressField.getText(), portFieldSearch.getText(), portFieldFile.getText())){
-					new ServerAddress(adressField.getText(), 
-							Integer.parseInt(portFieldSearch.getText()),
-							Integer.parseInt(portFieldFile.getText()),
-							Integer.parseInt(portFieldAdd.getText()));
+				String host = adressField.getText();
+				int port = Integer.parseInt(portFieldAdd.getText());
+				try {
+					Phase0Query query = new Phase0Query(Fileshare.getInstance().getUser().getManager().getMyAddress());
+					System.out.println("sending");
+					AddNodeClient client = new AddNodeClient(query, host, port);
+					client.setConnectionTimeout(5000);
+					System.out.println("final resp: " + client.sendQuery());
+				} catch(Exception e1) {
+					e1.printStackTrace();
+					System.out.println("failed");
 				}
 				dispose();
 			}
@@ -95,14 +89,6 @@ public class JoinNetworkBox extends JFrame {
 		this.setAlwaysOnTop(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-	}
-	
-	private boolean verifyAdress(String adresip, String portsearch, String portfile){
-		if(Pattern.compile("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]").matcher(adresip).matches() &&
-				Pattern.compile("[0-9]+").matcher(portsearch).matches() &&
-				Pattern.compile("[0-9]+").matcher(portfile).matches())
-			return true;
-		else return false;
 	}
 	
 	@SuppressWarnings("unused")

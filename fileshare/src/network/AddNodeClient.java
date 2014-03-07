@@ -3,6 +3,7 @@ package network;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 
@@ -20,6 +21,7 @@ public class AddNodeClient {
 	private PhaseQuery query;
 	private String IP;
 	private int port;
+	private int timeout = 0;
 	/**
 	 * Creates a client for this particular connection.
 	 * @param destAddress Destination adress.
@@ -38,7 +40,8 @@ public class AddNodeClient {
 	public String sendQuery() {
 		try {
 			
-			Socket client = new Socket(IP, port);
+			Socket client = new Socket();
+			client.connect(new InetSocketAddress(IP, port), timeout);
 			
 			PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 			out.println(query.toString());
@@ -55,5 +58,10 @@ public class AddNodeClient {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void setConnectionTimeout(int timeout) {
+		if(timeout > 0)
+			this.timeout = timeout;
 	}
 }
