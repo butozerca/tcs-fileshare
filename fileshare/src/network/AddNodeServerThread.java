@@ -15,6 +15,7 @@ import queries.Phase3Query;
 import queries.Phase4Query;
 import queries.PhaseQuery;
 
+import common.CheckAvailability;
 import common.Constants;
 
 public class AddNodeServerThread extends Thread {
@@ -60,7 +61,10 @@ public class AddNodeServerThread extends Thread {
 		for(ServerAddress sa : manager.getMyBlock()){
 			if(sa.equals(new ServerAddress(info)) || sa.equals(manager.getMyAddress()))
 				continue;
+			if(!CheckAvailability.available(sa))
+				continue;
 			PhaseQuery pq = new Phase4Query(id, new ServerAddress(info));
+			
 			AddNodeClient anc = new AddNodeClient(pq, sa.getIP(), sa.getDestPortAdd());
 			anc.sendQuery();
 		}
@@ -95,6 +99,8 @@ public class AddNodeServerThread extends Thread {
 					continue;
 				}
 				ServerAddress sa = manager.getChildBlock()[i].getRandom();
+				if(sa == null) 
+					continue;
 				AddNodeClient anc = new AddNodeClient(new Phase1Query(), sa.getIP(), sa.getDestPortAdd());
 				String rep = anc.sendQuery();
 				res = Math.min(res, Integer.parseInt(rep));
@@ -133,7 +139,6 @@ public class AddNodeServerThread extends Thread {
 						return;
 					}
 					else{
-						//wtf WTF nie ma polaczenia
 						return;
 					}
 				}
