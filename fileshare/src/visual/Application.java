@@ -122,6 +122,13 @@ public class Application extends JFrame {
 			}
 		});
 		
+		JButton btnSetIp = new JButton("Set IP");
+		btnSetIp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				SetIPBox.getInstance().setVisible(true);
+			}
+		});
+		
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -129,17 +136,18 @@ public class Application extends JFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnJoinNetwork)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(usernameText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(localPathText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(localPathText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSearch))
 							.addGap(181)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnSetIp, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(changelocalpathbtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(setusernamebtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-						.addComponent(btnSearch)
-						.addComponent(btnJoinNetwork))
+								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
@@ -159,7 +167,9 @@ public class Application extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewButton)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnSearch)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnSearch)
+						.addComponent(btnSetIp))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnJoinNetwork)
 					.addContainerGap(100, Short.MAX_VALUE))

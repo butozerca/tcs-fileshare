@@ -26,6 +26,7 @@ public class Fileshare extends Observable {
 	private Fileshare(){
 		if(!loadFromFile(savePath))
 			user = new User();
+		user.getManager().startServers();
 	}
 	
 	/**

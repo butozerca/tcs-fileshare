@@ -22,6 +22,9 @@ public class NetworkManager implements Serializable {
 	
 	private ServerAddress myAddress = new ServerAddress("0.0.0.0", 20000, 21000, 22000);
 	private AddressBlock parentBlock, myBlock;
+	private AddNodeServer ANS;
+	private FileSearchServer FSS;
+	private FileTransferServer FTS;
 
 	private AddressBlock[] childBlock;
 	private User user;
@@ -76,26 +79,33 @@ public class NetworkManager implements Serializable {
 	 */
 	public void startServers(){
 		try {
-			FileSearchServer FSS = new FileSearchServer(myAddress.getDestPortSearch(), this);
+			FSS = new FileSearchServer(myAddress.getDestPortSearch(), this);
 			FSS.setDaemon(true);
 			FSS.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
-			FileTransferServer FTS = new FileTransferServer(myAddress.getDestPortFile());
+			FTS = new FileTransferServer(myAddress.getDestPortFile());
 			FTS.setDaemon(true);
 			FTS.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
-			AddNodeServer ANS = new AddNodeServer(this);
+			ANS = new AddNodeServer(this);
 			ANS.setDaemon(true);
 			ANS.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void stopServers(){
+		FSS.stop();
+		FTS.stop();
+		ANS.stop();
 	}
 	
 	public static void main(String args[]){

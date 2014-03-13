@@ -1,8 +1,6 @@
-import java.awt.*;
+import java.awt.EventQueue;
 import java.net.InetAddress;
 import java.net.ServerSocket;
-
-import model.Fileshare;
 
 import visual.Application;
 
@@ -32,7 +30,6 @@ public class Main {
             	}
             	
             	new Application().setVisible(true);
-            	Fileshare.getInstance().getUser().getManager().startServers();
             }
         });
     }
