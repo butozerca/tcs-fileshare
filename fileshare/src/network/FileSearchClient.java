@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
+import common.CheckAvailability;
+
 import model.AddressBlock;
 import model.NetworkManager;
 import model.ServerAddress;
@@ -40,7 +42,7 @@ public class FileSearchClient {
 			return "";
 		StringBuilder reply = new StringBuilder();
 		for(ServerAddress addr : manager.getMyBlock()) {
-			if(addr.equals(manager.getMyAddress()))
+			if(addr.equals(manager.getMyAddress()) || !CheckAvailability.available(addr))
 				continue;
 			FileSearchQuery instantQuery = new FileSearchQuery(query.getId(), query.getFilename(), 0);
 			askAddress(addr.getIP(), addr.getDestPortSearch(), instantQuery, reply);
