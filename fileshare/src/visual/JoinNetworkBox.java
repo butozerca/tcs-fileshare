@@ -76,6 +76,7 @@ public class JoinNetworkBox extends JFrame {
 					Phase0Query query = new Phase0Query(Fileshare.getInstance().getUser().getManager().getMyAddress());
 					AddNodeClient client = new AddNodeClient(query, host, port);
 					client.setConnectionTimeout(5000);
+					client.sendQuery();
 				} catch(Exception e1) {
 					e1.printStackTrace();
 					System.out.println("failed");

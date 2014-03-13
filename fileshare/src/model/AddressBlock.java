@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+import common.CheckAvailability;
+
 /**
  * Macro for a list of addresses.
  * @author michal2
@@ -46,9 +48,19 @@ public class AddressBlock extends ArrayList<ServerAddress> {
 	}
 	
 	public ServerAddress getRandom() {
-		if(this.size() == 0)
+		AddressBlock active = listActive();
+		if(active.size() == 0)
 			return null;
-		return this.get(random.nextInt(this.size()));
+		return active.get(random.nextInt(active.size()));
+	}
+	
+	private AddressBlock listActive() {
+		AddressBlock res = new AddressBlock(this.meshId);
+		for(ServerAddress sa : this) {
+			if(CheckAvailability.available(sa))
+				res.add(sa);
+		}
+		return res;
 	}
 	
 }
