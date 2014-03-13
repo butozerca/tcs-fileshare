@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import model.AddressBlock;
 import model.Fileshare;
 import model.NetworkManager;
 import model.ServerAddress;
@@ -81,6 +82,10 @@ public class SetIPBox extends JFrame {
 				NetworkManager manager = Fileshare.getInstance().getUser().getManager();
 				manager.stopServers();
 				manager.setMyAddress(new ServerAddress(ip, searchPort, filePort, addPort));
+				manager.setMyBlock(new AddressBlock(1));
+				manager.getMyBlock().add(manager.getMyAddress());
+				manager.setChildBlock(new AddressBlock[] {null, null});
+				manager.setParentBlock(null);
 				manager.startServers();
 				dispose();
 			}
