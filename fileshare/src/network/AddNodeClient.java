@@ -50,8 +50,6 @@ public class AddNodeClient {
 				new InputStreamReader(client.getInputStream()));
 			
 			String line = in.readLine();
-			System.out.println("dostalem odpowiedz " + line);
-			
 			client.close();
 			return line;
 		} catch (Exception e) {

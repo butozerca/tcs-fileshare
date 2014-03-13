@@ -2,10 +2,6 @@ package model;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
 
 import network.AddNodeServer;
 import network.FileSearchServer;
@@ -22,9 +18,9 @@ public class NetworkManager implements Serializable {
 	
 	private ServerAddress myAddress = new ServerAddress("0.0.0.0", 20000, 21000, 22000);
 	private AddressBlock parentBlock, myBlock;
-	private AddNodeServer ANS;
-	private FileSearchServer FSS;
-	private FileTransferServer FTS;
+	private transient AddNodeServer ANS = null;
+	private transient FileSearchServer FSS = null;
+	private transient FileTransferServer FTS = null;
 
 	private AddressBlock[] childBlock;
 	private User user;
@@ -106,25 +102,6 @@ public class NetworkManager implements Serializable {
 		FSS.stop();
 		FTS.stop();
 		ANS.stop();
-	}
-	
-	public static void main(String args[]){
-		try {
-			Enumeration<NetworkInterface> n = NetworkInterface.getNetworkInterfaces();
-			for (; n.hasMoreElements();)
-		    {
-		        NetworkInterface e = n.nextElement();
-
-		        Enumeration<InetAddress> a = e.getInetAddresses();
-		        for (; a.hasMoreElements();)
-		        {
-		            InetAddress addr = a.nextElement();
-		            System.out.println("  " + addr.getHostAddress());
-		        }
-		    }
-		} catch (SocketException e) {
-			e.printStackTrace();
-		}
 	}
 	/**
 	 * @param parentBlock the parentBlock to set

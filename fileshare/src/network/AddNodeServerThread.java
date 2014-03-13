@@ -34,7 +34,6 @@ public class AddNodeServerThread extends Thread {
 				Phase0Query pquery = new Phase0Query(query);
 				AddNodeClient anc = new AddNodeClient(pquery, addr.getIP(), addr.getDestPortAdd());
 				String rep = anc.sendQuery();
-				System.out.println("forward UP: " + rep);
 				if(rep != null)
 					return;
 			}
@@ -47,13 +46,10 @@ public class AddNodeServerThread extends Thread {
 	}
 	
 	private void tellNeighbours(int id, String info){
-		System.out.println("moj block1:" + manager.getMyBlock());
 		for(AddressBlock ab : manager.getNeighbours()){
 			if(ab == null)
 				continue;
 			for(ServerAddress sa : ab){
-				System.out.println("moj bloczek: " + manager.getMyBlock());
-				System.out.println("tell neighbours: " + sa);
 				if(sa.equals(new ServerAddress(info)))
 					continue;
 				PhaseQuery pq = new Phase4Query(id, new ServerAddress(info));
@@ -61,11 +57,9 @@ public class AddNodeServerThread extends Thread {
 				anc.sendQuery();
 			}
 		}
-		System.out.println("moj block2:" + manager.getMyBlock());
 		for(ServerAddress sa : manager.getMyBlock()){
 			if(sa.equals(new ServerAddress(info)) || sa.equals(manager.getMyAddress()))
 				continue;
-			System.out.println("sa: " + sa);
 			PhaseQuery pq = new Phase4Query(id, new ServerAddress(info));
 			AddNodeClient anc = new AddNodeClient(pq, sa.getIP(), sa.getDestPortAdd());
 			anc.sendQuery();
@@ -73,7 +67,6 @@ public class AddNodeServerThread extends Thread {
 	}
 	
 	private void faza1(PrintWriter out, String info){
-		System.out.println("ODPALAM FAZE 1: " + manager.getMyAddress());
 		PhaseQuery pq = new Phase1Query();
 		AddNodeClient anc = new AddNodeClient(pq, manager.getMyAddress().getIP(), manager.getMyAddress().getDestPortAdd());
 		String rep = anc.sendQuery();
@@ -112,19 +105,16 @@ public class AddNodeServerThread extends Thread {
 	
 	private void Phase2Handler(PrintWriter out, int destid, String info){
 		if(manager.getMyBlock().getId() == destid){
-			System.out.println("my block p2h1: " + manager.getMyBlock());
 			AddressBlock[] newNodesBlocks = new AddressBlock[4];
 			newNodesBlocks[0] = manager.getParentBlock();
 			newNodesBlocks[1] = manager.getMyBlock();
 			newNodesBlocks[2] = manager.getChildBlock()[0];
 			newNodesBlocks[3] = manager.getChildBlock()[1];
-			System.out.println("my block p2h2: " + manager.getMyBlock());
 			ServerAddress sa = new ServerAddress(info);
 			newNodesBlocks[1].add(sa);			
 			PhaseQuery pq = new Phase3Query(manager.getMyBlock().getId(), newNodesBlocks);
 			AddNodeClient anc = new AddNodeClient(pq, sa.getIP(), sa.getDestPortAdd());
 			anc.sendQuery();
-			System.out.println("my block p2h3: " + manager.getMyBlock());
 			tellNeighbours(manager.getMyBlock().getId(), info);
 			out.println("OK p2h");
 			return;
@@ -200,20 +190,16 @@ public class AddNodeServerThread extends Thread {
 			if(manager.getChildBlock()[0] == null)
 				manager.setChildBlock(0, new AddressBlock(id));
 			manager.getChildBlock()[0].add(sa);
-			System.out.println(manager.getMyAddress().getDestPortAdd() + " dodalem jako lewe dziecko " + sa);
 		} else if (2*myid + 1 == id) {
 			if(manager.getChildBlock()[1] == null)
 				manager.setChildBlock(1, new AddressBlock(id));
 			manager.getChildBlock()[1].add(sa);
-			System.out.println(manager.getMyAddress().getDestPortAdd() + " dodalem jako prawe dziecko " + sa);
 		}
 		else if(myid == id) {
 			manager.getMyBlock().add(sa);
-			System.out.println(manager.getMyAddress().getDestPortAdd() + " dodalem do siebie " + sa);
 		}
 		else if(myid/2 == id) {
 			manager.getParentBlock().add(sa);
-			System.out.println(manager.getMyAddress().getDestPortAdd() + " dodalem jako rodzica " + sa);
 		}
 		out.println("DODALEM2" + manager.getMyAddress());
 	}

@@ -31,10 +31,8 @@ public class FileSearchServerThread extends Thread {
 					new InputStreamReader(socket.getInputStream()));
 			String line = in.readLine();
 			FileSearchQuery query = new FileSearchQuery(line);
-			//System.out.println("Server " + socket.getLocalPort() + " received query: " + query);
 			
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-			
 			ArrayList<String> files = SearchFile.searchFile(query.getFilename(), Fileshare.getSharedPath());
 			for(String file : files) {
 				out.println(manager.getMyAddress().getIP() + ":" + manager.getMyAddress().getDestPortFile() +

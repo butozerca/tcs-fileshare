@@ -87,6 +87,7 @@ public class SetIPBox extends JFrame {
 				manager.setChildBlock(new AddressBlock[] {null, null});
 				manager.setParentBlock(null);
 				manager.startServers();
+				System.out.println("Address changed to " + manager.getMyAddress());
 				dispose();
 			}
 		});

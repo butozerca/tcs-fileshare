@@ -2,7 +2,6 @@ package common;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 /**
  * Class that provides a static method which searches for a filename in a selected directory.
  * @author michal2
@@ -33,17 +32,6 @@ public class SearchFile {
         		res.add(fil.getAbsolutePath());
         }
         return res;
-    }
-	
-    public static void main(String[] args) 
-    {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the directory where to search ");
-        String directory = scan.next();
-        ArrayList<String> res = SearchFile.searchFile("User.java", directory);
-        for(String s : res)
-        	System.out.println(s);
-        scan.close();
     }
 
 }

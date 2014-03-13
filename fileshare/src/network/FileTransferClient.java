@@ -51,7 +51,6 @@ public class FileTransferClient {
 			Cipher des = Cipher.getInstance("DES");
 			des.init(Cipher.DECRYPT_MODE, desKey);
 			CipherInputStream cin = new CipherInputStream(client.getInputStream(), des);
-			
 			FileOutputStream fout = new FileOutputStream(Fileshare.getSharedPath() + new File(file).getName());
 			int b;
 			while((b = cin.read()) != -1)

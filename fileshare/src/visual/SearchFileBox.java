@@ -71,8 +71,6 @@ public class SearchFileBox extends JFrame {
 				FileSearchQuery query = new FileSearchQuery(sender.getMyBlock().getId(),
 						filename, Constants.query_ttl);
 				FileSearchClient cl = new FileSearchClient(sender, query, 0);
-				System.out.println(query);
-				System.out.println(cl.getContent());
 				FilePickerWindow.getInstance(cl.getContent()).setVisible(true);
 				dispose();
 			}
