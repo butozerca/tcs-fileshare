@@ -7,6 +7,8 @@
 .metadata
 bin/
 tmp/
+target/
+fileshare/save/
 *.tmp
 *.bak
 *.swp
