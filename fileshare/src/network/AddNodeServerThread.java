@@ -214,6 +214,10 @@ public class AddNodeServerThread extends Thread {
 			BufferedReader in = new BufferedReader(
 					new InputStreamReader(socket.getInputStream()));
 			String line = in.readLine();
+			if(line == null) {
+				socket.close();
+				return;
+			}
 			System.out.println("dostalem query " + line);
 			PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			String[] q = line.split(";");

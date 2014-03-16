@@ -85,7 +85,9 @@ public class ChangeLocalPathBox extends JFrame {
 	}
 	
 	private boolean validatePath(String text){
-		if(Pattern.compile("([a-zA-Z0-9]+/)+").matcher(text).matches())
+		if(Pattern.compile("([a-zA-Z0-9/.]+/)+").matcher(text).matches())
+			return true;
+		if(Pattern.compile("([a-zA-Z0-9/.]+\\)+").matcher(text).matches())
 			return true;
 		return false;
 	}
