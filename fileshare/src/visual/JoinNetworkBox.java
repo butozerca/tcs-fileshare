@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import common.Constants;
+
 import model.Fileshare;
 import model.ServerAddress;
 import network.AddNodeClient;
@@ -75,7 +77,7 @@ public class JoinNetworkBox extends JFrame {
 				try {
 					Phase0Query query = new Phase0Query(Fileshare.getInstance().getUser().getManager().getMyAddress());
 					AddNodeClient client = new AddNodeClient(query, host, port);
-					client.setConnectionTimeout(5000);
+					client.setConnectionTimeout(Constants.ping_timeout);
 					client.sendQuery();
 				} catch(Exception e1) {
 					e1.printStackTrace();
